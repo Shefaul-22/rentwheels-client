@@ -7,19 +7,38 @@ import { AuthContext } from '../../provider/AuthContext';
 
 const Register = () => {
 
-    const { createUser, signInWithGoogle} = use(AuthContext)
+    const { createUser, signInWithGoogle } = use(AuthContext)
 
     const handleRegister = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
+        const image = e.target.photourl.value;
+        const name = e.target.name.value;
 
-        // console.log(email,password)
+        
+        // const newUser = { name, email, image }
+
+        // console.log(newUser)
         createUser(email, password)
             .then(result => {
-                console.log('handle register',result.user)
+                // console.log('handle register', result.user);
+                const newUser = { name, email:result.user.email, image }
+                
+                // create user in database
+                fetch('http://localhost:3000/users', {
 
-             
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(newUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log('data after user save', data);
+                    })
+
             })
             .catch(error => {
                 console.log(error.message);
@@ -29,13 +48,14 @@ const Register = () => {
     const handleGoogleSignIn = () => {
         signInWithGoogle()
             .then(result => {
-                console.log(result.user);
+                // console.log(result.user);
 
                 const newUser = {
                     name: result.user.displayName,
                     email: result.user.email,
                     image: result.user.photoURL
                 }
+                // console.log(newUser);
                 // create user in database
                 fetch('http://localhost:3000/users', {
 
@@ -72,8 +92,8 @@ const Register = () => {
                             <label className="label">Email</label>
                             <input type="email" className="input" name='email' placeholder="Email" />
                             {/* Photo URL */}
-                            <label className="label">Image-URL</label>
-                            <input type="text" className="input" name='imgurl' placeholder="Image-URL" />
+                            <label className="label">Photo-URL</label>
+                            <input type="text" className="input" name='photourl' placeholder="Photo-URL" />
                             {/* Password */}
                             <label className="label">Password</label>
                             <input type="password" className="input" name='password' placeholder="Password" />
