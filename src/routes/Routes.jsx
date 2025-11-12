@@ -4,6 +4,7 @@ import HomeLayout from "../layouts/HomeLayout";
 import Home from "../components/Home/Home";
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
+import BrowseCars from "../components/BrowseCars/BrowseCars";
 
 const router = createBrowserRouter([
 
@@ -22,7 +23,13 @@ const router = createBrowserRouter([
             {
                 path: "register",
                 element: <Register></Register>
+            },
+            {
+                path: "browseCars",
+                element: <BrowseCars></BrowseCars>
+
             }
+
         ]
 
     }

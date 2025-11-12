@@ -19,13 +19,14 @@ const Navbar = () => {
 
     const links = <>
         <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/allProducts">AllProducts</NavLink></li>
+        <li><NavLink to="/browseCars">Browse Cars</NavLink></li>
         
 
         {
             user && <>
-                <li><NavLink to="/myProducts">My Products</NavLink></li>
-                <li><NavLink to="/myBids">My Bids</NavLink></li>
+                <li><NavLink to="/addCar" className={`btn btn-primary`}>Add Car</NavLink></li>
+                <li><NavLink to="/myBookings" className={`btn btn-primary`}>My Bookings</NavLink></li>
+                <li><NavLink to="/myListings" className={`btn btn-primary`}>My Listings</NavLink></li>
             </> 
         }
 
@@ -48,7 +49,7 @@ const Navbar = () => {
 
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">Shopzy<span className='text-primary'>Deals</span></a>
+                <a className=" text-3xl">Rent<span className='text-primary'>Wheels</span></a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
