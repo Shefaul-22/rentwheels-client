@@ -5,6 +5,8 @@ import Home from "../components/Home/Home";
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
 import BrowseCars from "../components/BrowseCars/BrowseCars";
+import PrivateRoute from "../provider/PrivateRoute";
+import AddCar from "../components/AddCar/AddCar";
 
 const router = createBrowserRouter([
 
@@ -28,6 +30,10 @@ const router = createBrowserRouter([
                 path: "browseCars",
                 element: <BrowseCars></BrowseCars>
 
+            },
+            {
+                path: "addCar",
+                element: <PrivateRoute><AddCar></AddCar></PrivateRoute>
             }
 
         ]

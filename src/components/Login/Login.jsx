@@ -36,7 +36,7 @@ const Login = () => {
 
 
     return (
-        <div className="hero bg-base-200 min-h-screen w-11/12 mx-auto">
+        <div className="hero bg-base-200 min-h-screen w-11/12 mx-auto mt-4">
 
             <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                 <div className="card-body">

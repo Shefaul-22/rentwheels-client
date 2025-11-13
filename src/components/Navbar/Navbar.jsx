@@ -18,16 +18,16 @@ const Navbar = () => {
     }
 
     const links = <>
-        <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/browseCars">Browse Cars</NavLink></li>
-        
+        <li><NavLink to="/" className={`btn btn-primary mr-2`}>Home</NavLink></li>
+        <li><NavLink to="/browseCars" className={`btn btn-primary mr-2`}>Browse Cars</NavLink></li>
+        <li><NavLink to="/addCar" className={`btn btn-primary mr-2`}>Add Car</NavLink></li>
 
         {
             user && <>
-                <li><NavLink to="/addCar" className={`btn btn-primary`}>Add Car</NavLink></li>
-                <li><NavLink to="/myBookings" className={`btn btn-primary`}>My Bookings</NavLink></li>
-                <li><NavLink to="/myListings" className={`btn btn-primary`}>My Listings</NavLink></li>
-            </> 
+                
+                <li><NavLink to="/myBookings" className={`btn btn-primary mr-2`}>My Bookings</NavLink></li>
+                <li><NavLink to="/myListings" className={`btn btn-primary mr-2`}>My Listings</NavLink></li>
+            </>
         }
 
     </>

@@ -1,8 +1,9 @@
 import React, { use } from 'react';
 
 import { Link } from 'react-router';
-import { FcGoogle } from 'react-icons/fc';
+
 import { AuthContext } from '../../provider/AuthContext';
+import { FcGoogle } from 'react-icons/fc';
 
 
 const Register = () => {
