@@ -42,6 +42,7 @@ const AddCar = () => {
             providerName: provider.name,
             providerEmail: provider.email,
             createdAt: new Date(),
+            status: "available"
         };
 
         try {
@@ -164,7 +165,7 @@ const AddCar = () => {
                     />
                 </div>
 
-                {/* Add car Submit Button */}
+                {/* Add car Submit btn */}
                 <button type="submit" className="btn btn-primary w-full mt-4">
                     Add Car
                 </button>
