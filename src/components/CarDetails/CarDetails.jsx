@@ -9,14 +9,18 @@ import Loading from "../Loading/Loading";
 const CarDetails = () => {
     const { id } = useParams();
     const { user } = use(AuthContext);
+    // console.log(user)
     const [car, setCar] = useState(null);
 
     // fetch data from mongodb
     useEffect(() => {
         fetch(`http://localhost:3000/cars/${id}`)
             .then((res) => res.json())
-            .then((data) => setCar(data))
-            .catch((err) => console.error(err));
+            .then(data => {
+                // console.log(data)
+                setCar(data)
+            })
+
     }, [id]);
 
 
@@ -34,21 +38,40 @@ const CarDetails = () => {
                     carId: car._id,
                     userName: user.displayName,
                     userEmail: user.email,
+                    location: car.location
                 }),
             });
 
             const data = await res.json();
+            console.log(data)
 
             if (data.success) {
-                Swal.fire("Success", "Car booked successfully ", "success");
-                
+                Swal.fire({
+                    title: "Car booked successfully!",
+                    icon: "success",
+                    draggable: true,
+                    confirmButtonColor: "#4CAF50",
+                });
+                // Swal.fire("Success", "Car booked successfully ", "success");
+
                 setCar((prev) => ({ ...prev, status: "unavailable" }));
             } else {
-                Swal.fire("Error", data.message || "Booking failed", "error");
+                Swal.fire({
+                    title: "Booking failed!",
+                    icon: "error",
+                    draggable: true,
+
+                });
+                
             }
         } catch (error) {
             console.error(error);
-            Swal.fire("Error", "Something went wrong while booking", "error");
+            Swal.fire({
+                title: "Booking failed!",
+                icon: "error",
+                draggable: true,
+
+            });
         }
     };
 
@@ -79,7 +102,9 @@ const CarDetails = () => {
                 <div className="md:w-1/2 flex flex-col justify-between">
                     <div>
                         <h1 className="text-3xl font-bold mb-2">{car.name}</h1>
-                        <p className="text-gray-700 mb-2">{car.description}</p>
+                        <div>
+                            <p className="text-gray-700 mb-2">{car.description}</p>
+                        </div>
                         <p className="text-gray-700 mb-1">🚗 Category: {car.category}</p>
                         <p className="text-gray-700 mb-1">💰 Rent: ${car.rentPrice}/day</p>
                         <p className="text-gray-700 mb-1">📍 Location: {car.location}</p>
@@ -93,9 +118,9 @@ const CarDetails = () => {
                     <button
                         onClick={handleBooking}
                         disabled={car.status !== "available"}
-                        className={`mt-6 py-3 rounded-lg text-white font-semibold w-full transition ${car.status === "available"
-                                ? "bg-blue-600 hover:bg-blue-700"
-                                : "bg-gray-400 cursor-not-allowed"
+                        className={`mt-6 py-3 rounded-lg text-white cursor-pointer font-semibold w-full transition ${car.status === "available"
+                            ? "bg-blue-600 hover:bg-blue-700"
+                            : "bg-gray-400 cursor-not-allowed"
                             }`}
                     >
                         Book Now

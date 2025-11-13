@@ -8,6 +8,8 @@ import BrowseCars from "../components/BrowseCars/BrowseCars";
 import PrivateRoute from "../provider/PrivateRoute";
 import AddCar from "../components/AddCar/AddCar";
 import CarDetails from "../components/CarDetails/CarDetails";
+import MyBookings from "../components/MyBookings/MyBookings";
+import MyListings from "../components/MyListings/MyListings";
 
 const router = createBrowserRouter([
 
@@ -40,6 +42,15 @@ const router = createBrowserRouter([
                 path: "carDetails/:id",
                 element: <PrivateRoute><CarDetails></CarDetails></PrivateRoute>
 
+            },
+            {
+                path: "myBookings",
+                element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>
+            },
+
+            {
+                path: "myListings",
+                element: <PrivateRoute><MyListings></MyListings></PrivateRoute>
             }
 
         ]
