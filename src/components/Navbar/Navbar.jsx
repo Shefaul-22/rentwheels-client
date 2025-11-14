@@ -6,6 +6,7 @@ import { AuthContext } from '../../provider/AuthContext';
 const Navbar = () => {
 
     const { user, signOutUser } = use(AuthContext);
+    console.log(user)
 
     const handleSignOut = () => {
         signOutUser()
@@ -24,7 +25,7 @@ const Navbar = () => {
 
         {
             user && <>
-                
+
                 <li><NavLink to="/myBookings" className={`btn btn-primary mr-2`}>My Bookings</NavLink></li>
                 <li><NavLink to="/myListings" className={`btn btn-primary mr-2`}>My Listings</NavLink></li>
             </>
@@ -59,12 +60,64 @@ const Navbar = () => {
                     }
                 </ul>
             </div>
-            <div className="navbar-end">
+            {/* <div className="navbar-end">
                 {
                     user ? <a onClick={handleSignOut} className="btn btn-primary">Sign Out</a> :
                         <Link to='/login' className='btn btn-primary'>Login</Link>
                 }
+            </div> */}
+            
+
+            <div className="navbar-end">
+
+                {user ? (
+                    <div className="dropdown dropdown-end">
+
+                   
+                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                            <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                <img
+                                    alt="User"
+                                    src={user.photoURL || "https://i.ibb.co/2M7rtLk/default-user.png"}
+                                />
+                            </div>
+                        </label>
+
+                        {/* dropdown here */}
+                        <ul
+                            tabIndex={0}
+                            className="mt-3 z-50 p-4 shadow-xl menu menu-sm dropdown-content bg-base-100 rounded-xl w-60"
+                        >
+                            
+                            <li className="flex flex-col items-start pb-3 border-b mb-3">
+                                <span className="text-lg font-semibold">
+                                    {user.displayName || "User"}
+                                </span>
+
+                                <span className="text-sm text-gray-500">
+                                    {user.email}
+                                </span>
+                            </li>
+
+                            
+                            <li>
+                                <button
+                                    onClick={handleSignOut}
+                                    className="btn btn-error btn-sm w-full text-white"
+                                >
+                                    Log Out
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                ) : (
+                    <Link to="/login" className="btn btn-primary">
+                        Login
+                    </Link>
+                )}
+
             </div>
+
         </div>
     );
 };
