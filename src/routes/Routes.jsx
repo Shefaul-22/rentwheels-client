@@ -10,6 +10,7 @@ import AddCar from "../components/AddCar/AddCar";
 import CarDetails from "../components/CarDetails/CarDetails";
 import MyBookings from "../components/MyBookings/MyBookings";
 import MyListings from "../components/MyListings/MyListings";
+import ErrorPage from "../components/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
 
@@ -51,10 +52,15 @@ const router = createBrowserRouter([
             {
                 path: "myListings",
                 element: <PrivateRoute><MyListings></MyListings></PrivateRoute>
-            }
+            },
 
         ]
 
+    },
+    {
+        path: "*",
+        element: <ErrorPage></ErrorPage>
     }
+
 ])
 export default router;
