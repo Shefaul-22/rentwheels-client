@@ -1,10 +1,18 @@
 import React, { use } from 'react';
 import { Link } from 'react-router';
+import { AuthContext } from '../../provider/AuthContext';
+import Loading from '../Loading/Loading';
 
 const NewestCars = ({ carsPromise }) => {
 
     const cars = use(carsPromise);
-    console.log(cars)
+    // console.log(cars)
+
+    const {loading} = use(AuthContext)
+    
+    if (loading){
+       return <Loading></Loading> 
+    } 
 
     return (
         <div className="p-6">
