@@ -78,7 +78,7 @@ const CarDetails = () => {
     if (!car) return <div className="text-center mt-10"><Loading></Loading></div>;
 
     return (
-        <div className="max-w-5xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-md">
+        <div className="max-w-7xl mx-auto mt-10 p-6 pt-10 bg-white rounded-2xl shadow-md">
             <div className="flex flex-col md:flex-row gap-6">
 
                 {/* car image */}

@@ -29,8 +29,8 @@ const BrowseCars = () => {
     }
 
     return (
-        <div className="p-6">
-            <h1 className="text-2xl font-bold mb-6 text-center">All Cars</h1>
+        <div className="p-6 mt-5">
+            <h1 className="text-4xl font-bold my-8 text-center">All Cars</h1>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {

@@ -9,16 +9,16 @@ const MyListings = () => {
     const [selectedCar, setSelectedCar] = useState(null);
     const modalRef = useRef();
 
-    // Fetch  cars using email
+    // Fetch Cars
     useEffect(() => {
         if (!user) return;
         fetch(`http://localhost:3000/myListing?email=${user.email}`)
-            .then(res => res.json())
-            .then(data => setCars(data))
-            .catch(err => console.error(err));
+            .then((res) => res.json())
+            .then((data) => setCars(data))
+            .catch((err) => console.error(err));
     }, [user]);
 
-    // Delete car
+    // DELETE Car
     const handleCarDelete = async (id) => {
         const confirmed = await Swal.fire({
             title: "Are you sure?",
@@ -28,45 +28,43 @@ const MyListings = () => {
             confirmButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!",
         });
+
         if (!confirmed.isConfirmed) return;
 
         try {
             const res = await fetch(`http://localhost:3000/cars/${id}`, {
-                method: "DELETE"
+                method: "DELETE",
             });
-            if (res.ok) {
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Car removed successfully.",
-                    icon: "success",
-                    confirmButtonColor: "#4CAF50",
-                });
 
-                setCars(cars.filter(car => car._id !== id));
+            if (res.ok) {
+                Swal.fire("Deleted!", "Car removed successfully.", "success");
+
+                const updatedCars = cars.filter((car) => car._id !== id);
+                setCars(updatedCars);
             } else {
-                const errMessage = await res.json();
-                Swal.fire("Error!", errMessage.message || "Delete failed", "error");
+                Swal.fire("Error!", "Delete failed", "error");
             }
-        } catch (err) {
-            console.error(err);
+        } catch {
             Swal.fire("Error!", "Failed to delete car", "error");
         }
     };
 
-    // modal 
+    // OPEN MODAL
     const openModal = (car) => {
         setSelectedCar(car);
         modalRef.current.showModal();
     };
 
+    // CLOSE MODAL
     const closeModal = () => {
         modalRef.current.close();
         setSelectedCar(null);
     };
 
-    // Handle update car
+    // PATCH Update
     const handleUpdate = async (e) => {
         e.preventDefault();
+
         const updatedFields = {
             name: e.target.name.value,
             description: e.target.description.value,
@@ -83,24 +81,19 @@ const MyListings = () => {
                 body: JSON.stringify(updatedFields),
             });
 
-            const data = await res.json();
             if (res.ok) {
-                Swal.fire({
-                    title: "Success!",
-                    text: data.message,
-                    icon: "success",
-                    confirmButtonColor: "#4CAF50",
-                });
-                const newCars = cars.map(car =>
+                Swal.fire("Success!", "Car updated successfully!", "success");
+
+                const updatedList = cars.map((car) =>
                     car._id === selectedCar._id ? { ...car, ...updatedFields } : car
                 );
-                setCars(newCars);
+
+                setCars(updatedList);
                 closeModal();
             } else {
-                Swal.fire("Error!", data.message || "Update failed", "error");
+                Swal.fire("Error!", "Update failed", "error");
             }
-        } catch (err) {
-            console.error(err);
+        } catch {
             Swal.fire("Error!", "Update failed", "error");
         }
     };
@@ -108,114 +101,183 @@ const MyListings = () => {
     if (loading) return <Loading />;
 
     return (
-        <div className="max-w-6xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-md">
-            <h1 className="text-3xl font-bold mb-6 text-center">My Listings</h1>
+        <div className="max-w-7xl mx-auto mt-10 p-4 sm:p-6 bg-white rounded-lg shadow-md">
+            <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center">
+                My Listings
+            </h1>
 
             {cars.length === 0 ? (
                 <p className="text-center text-gray-600">No cars added yet.</p>
             ) : (
-                <div className="overflow-x-auto">
-                    <table className="table w-full">
-                        <thead>
-                            <tr className="bg-gray-100 text-gray-700">
-                                <th>Car Name</th>
-                                <th>Category</th>
-                                <th>Rent Price</th>
-                                <th>Status</th>
-                                <th className="text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {cars.map(car => (
-                                <tr key={car._id} className="border-b">
-                                    <td className="font-medium">{car.name}</td>
-                                    <td>{car.category}</td>
-                                    <td>${car.rentPrice}/day</td>
-                                    <td>
-                                        <span className={`px-3 py-1 rounded-full text-white ${car.status === "available" ? "bg-green-600" : "bg-red-600"}`}>
-                                            {car.status}
-                                        </span>
-                                    </td>
-                                    <td className="flex gap-3 justify-center">
-                                        <button onClick={() => openModal(car)} className="btn btn-sm btn-info text-white">
-                                            Update
-                                        </button>
-                                        <button onClick={() => handleCarDelete(car._id)} className="btn btn-sm btn-error text-white">
-                                            Delete
-                                        </button>
-                                    </td>
+                <>
+                    {/* Mobile View */}
+                    {/* Mobile View */}
+                    <div className="sm:hidden space-y-4">
+                        {cars.map((car) => (
+                            <div key={car._id} className="p-4 border rounded-lg shadow-sm">
+                                <h2 className="font-semibold text-lg">{car.name}</h2>
+                                <p>Category: {car.category}</p>
+                                <p>Rent: ${car.rentPrice}/day</p>
+
+                                <p>
+                                    Status:
+                                    <span
+                                        className={`ml-2 px-2 py-1 rounded-full text-white text-xs ${car.status === "available" ? "bg-green-600" : "bg-red-600"
+                                            }`}
+                                    >
+                                        {car.status}
+                                    </span>
+                                </p>
+
+                                {/* ⭐ Updated Button Layout ⭐ */}
+                                <div className="mt-4 grid grid-cols-2 gap-3">
+                                    <button
+                                        onClick={() => openModal(car)}
+                                        className="btn btn-sm w-full bg-blue-600 text-white hover:bg-blue-700"
+                                    >
+                                        Update
+                                    </button>
+
+                                    <button
+                                        onClick={() => handleCarDelete(car._id)}
+                                        className="btn btn-sm w-full bg-red-600 text-white hover:bg-red-700"
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+
+                    {/* Desktop View */}
+                    <div className="hidden sm:block overflow-x-auto rounded-xl border">
+                        <table className="table w-full text-sm sm:text-base">
+                            <thead className="bg-gray-100 text-gray-700 text-sm">
+                                <tr>
+                                    <th>Car Name</th>
+                                    <th>Category</th>
+                                    <th>Rent Price</th>
+                                    <th>Status</th>
+                                    <th className="text-center">Actions</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+                            <tbody>
+                                {cars.map((car) => (
+                                    <tr key={car._id} className="border-b hover:bg-gray-50">
+                                        <td className="font-medium">{car.name}</td>
+                                        <td>{car.category}</td>
+                                        <td>${car.rentPrice}/day</td>
+                                        <td>
+                                            <span
+                                                className={`px-3 py-1 rounded-full text-white ${car.status === "available"
+                                                    ? "bg-green-600"
+                                                    : "bg-red-600"
+                                                    }`}
+                                            >
+                                                {car.status}
+                                            </span>
+                                        </td>
+                                        <td className="flex gap-2 justify-center">
+                                            <button
+                                                onClick={() => openModal(car)}
+                                                className="btn btn-xs sm:btn-sm btn-info text-white"
+                                            >
+                                                Update
+                                            </button>
+                                            <button
+                                                onClick={() => handleCarDelete(car._id)}
+                                                className="btn btn-xs sm:btn-sm btn-error text-white"
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </>
             )}
 
-            {/* Modal code  */}
+            {/* UPDATE MODAL */}
             <dialog ref={modalRef} className="modal">
-                <div className="modal-box max-w-lg relative">
-                    {/* Close btn*/ }
+                <div className="modal-box max-w-sm sm:max-w-lg relative">
                     <button
                         onClick={closeModal}
                         className="absolute top-2 right-2 btn btn-sm btn-circle btn-ghost"
-                        title="Close"
                     >
                         ✕
                     </button>
 
-                    <h3 className="font-bold text-xl mb-4">Update Car</h3>
+                    <h3 className="font-bold text-lg mb-4">Update Car</h3>
 
                     {selectedCar && (
-                        <form onSubmit={handleUpdate} className="space-y-4">
-                            <div>
-                                <label className="block font-medium">Car Name</label>
-                                <input name="name" defaultValue={selectedCar.name} className="input input-bordered w-full" required />
-                            </div>
+                        <form onSubmit={handleUpdate} className="space-y-3">
+                            <input
+                                name="name"
+                                defaultValue={selectedCar.name}
+                                className="input input-bordered w-full"
+                                required
+                            />
 
-                            <div>
-                                <label className="block font-medium">Description</label>
-                                <textarea name="description" defaultValue={selectedCar.description} className="textarea textarea-bordered w-full" required />
-                            </div>
+                            <textarea
+                                name="description"
+                                defaultValue={selectedCar.description}
+                                className="textarea textarea-bordered w-full"
+                                required
+                            />
 
-                            <div>
-                                <label className="block font-medium">Category</label>
-                                <select name="category" defaultValue={selectedCar.category} className="select select-bordered w-full" required>
-                                    <option>Sedan</option>
-                                    <option>SUV</option>
-                                    <option>Hatchback</option>
-                                    <option>Luxury</option>
-                                    <option>Electric</option>
-                                </select>
-                            </div>
+                            <select
+                                name="category"
+                                defaultValue={selectedCar.category}
+                                className="select select-bordered w-full"
+                                required
+                            >
+                                <option>Sedan</option>
+                                <option>SUV</option>
+                                <option>Hatchback</option>
+                                <option>Luxury</option>
+                                <option>Electric</option>
+                            </select>
 
-                            <div>
-                                <label className="block font-medium">Rent Price</label>
-                                <input name="rentPrice" type="number" defaultValue={selectedCar.rentPrice} className="input input-bordered w-full" required />
-                            </div>
+                            <input
+                                name="rentPrice"
+                                type="number"
+                                defaultValue={selectedCar.rentPrice}
+                                className="input input-bordered w-full"
+                                required
+                            />
 
-                            <div>
-                                <label className="block font-medium">Location</label>
-                                <input name="location" defaultValue={selectedCar.location} className="input input-bordered w-full" required />
-                            </div>
+                            <input
+                                name="location"
+                                defaultValue={selectedCar.location}
+                                className="input input-bordered w-full"
+                                required
+                            />
 
-                            <div>
-                                <label className="block font-medium">Image URL</label>
-                                <input name="image" defaultValue={selectedCar.image} className="input input-bordered w-full" required />
-                            </div>
+                            <input
+                                name="image"
+                                defaultValue={selectedCar.image}
+                                className="input input-bordered w-full"
+                                required
+                            />
 
-                            <div>
-                                <label className="block font-medium">Provider Name</label>
-                                <input name="providerName" value={selectedCar.providerName} readOnly className="input input-bordered w-full bg-gray-100" />
-                            </div>
+                            <input
+                                readOnly
+                                value={selectedCar.providerName}
+                                className="input input-bordered w-full bg-gray-100"
+                            />
 
-                            <div>
-                                <label className="block font-medium">Provider Email</label>
-                                <input name="providerEmail" value={selectedCar.providerEmail} readOnly className="input input-bordered w-full bg-gray-100" />
-                            </div>
+                            <input
+                                readOnly
+                                value={selectedCar.providerEmail}
+                                className="input input-bordered w-full bg-gray-100"
+                            />
 
-                            <div className="flex gap-2">
-                                <button type="submit" className="btn btn-primary w-full">Save Changes</button>
-                            </div>
+                            <button type="submit" className="btn btn-primary w-full">
+                                Save Changes
+                            </button>
                         </form>
                     )}
                 </div>
@@ -225,3 +287,4 @@ const MyListings = () => {
 };
 
 export default MyListings;
+

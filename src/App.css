@@ -13,7 +13,7 @@
 }
 
 .btn-primary {
-  @apply text-white border-none bg-gradient-to-r from-[#632EE3] to-[#9F62F2];
+  @apply text-white border-none bg-gradient-to-r from-[#fc8d5979] to-[#353e9193];
 }
 
 

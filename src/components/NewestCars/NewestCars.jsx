@@ -9,13 +9,13 @@ const NewestCars = ({ carsPromise }) => {
     // console.log(cars)
 
     const {loading} = use(AuthContext)
-    
+
     if (loading){
        return <Loading></Loading> 
     } 
 
     return (
-        <div className="p-6">
+        <div className=" max-w-7xl mx-auto p-6 bg-[#bdd7e7] ">
             <h1 className="text-2xl font-bold mb-6 text-center">Newest Cars</h1>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -23,14 +23,14 @@ const NewestCars = ({ carsPromise }) => {
                     cars.map((car) => (
                         <div
                             key={car._id}
-                            className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+                            className="bg-[#eff3ff] rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
                         >
                             {/*  Car Image */}
                             <div className="relative ">
                                 <img
                                     src={car.image}
                                     alt={car.name}
-                                    className="w-full h-48 object-cover"
+                                    className="w-full h-56 object-cover rounded-md p-5"
                                 />
                                 <span
                                     className={`absolute top-3 right-3 px-3 py-1 rounded-full text-white font-semibold ${car.status === "available" ? "bg-green-600" : "bg-red-600"

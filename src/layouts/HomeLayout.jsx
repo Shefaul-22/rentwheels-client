@@ -4,10 +4,14 @@ import Navbar from '../components/Navbar/Navbar';
 
 const HomeLayout = () => {
     return (
-        <div>
-            <Navbar></Navbar>
-            <Outlet></Outlet>
-            <div>Footer</div>
+        <div className='bg-[#BDD7E7] '>
+            <header>
+                <Navbar></Navbar>
+            </header>
+            <main className='mt-16'>
+                <Outlet></Outlet>
+            </main>
+            <footer>Footer</footer>
         </div>
     );
 };
