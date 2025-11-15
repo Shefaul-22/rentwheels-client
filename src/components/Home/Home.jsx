@@ -4,16 +4,40 @@ import HeroSection from '../HeroSection/HeroSection';
 import WhyRentWithUs from '../WhyRentWithUs/WhyRentWithUs';
 import CustomerTestimonials from '../CustomerTestomonials/CustomerTestimonials';
 import TopRatedCars from '../TopRatedCars/TopRatedCars';
+import RandomCars from '../RandomCars/RandomCars';
+import FramerMotionAnimation from '../FramerMotionAnimation/FramerMotionAnimation';
+
 
 const carsPromise = fetch('http://localhost:3000/cars/newest').then(res => res.json());
+
 const Home = () => {
     return (
-        <div>
-            <HeroSection></HeroSection>
-            <NewestCars carsPromise={carsPromise}></NewestCars>
-            <WhyRentWithUs></WhyRentWithUs>
-            <TopRatedCars></TopRatedCars>
-            <CustomerTestimonials></CustomerTestimonials>
+        <div >
+
+            <FramerMotionAnimation>
+                <HeroSection />
+            </FramerMotionAnimation>
+
+            <FramerMotionAnimation>
+                <RandomCars />
+            </FramerMotionAnimation>
+
+            <FramerMotionAnimation>
+                <NewestCars carsPromise={carsPromise} />
+            </FramerMotionAnimation>
+
+            <FramerMotionAnimation>
+                <WhyRentWithUs />
+            </FramerMotionAnimation>
+
+            <FramerMotionAnimation>
+                <TopRatedCars />
+            </FramerMotionAnimation>
+
+            <FramerMotionAnimation>
+                <CustomerTestimonials />
+            </FramerMotionAnimation>
+
         </div>
     );
 };

@@ -43,7 +43,8 @@ const CarDetails = () => {
             });
 
             const data = await res.json();
-            console.log(data)
+            
+            // console.log(data)
 
             if (data.success) {
                 Swal.fire({
@@ -52,7 +53,7 @@ const CarDetails = () => {
                     draggable: true,
                     confirmButtonColor: "#4CAF50",
                 });
-                // Swal.fire("Success", "Car booked successfully ", "success");
+                
 
                 setCar((prev) => ({ ...prev, status: "unavailable" }));
             } else {
@@ -79,6 +80,7 @@ const CarDetails = () => {
 
     return (
         <div className="max-w-7xl mx-auto mt-10 p-6 pt-10 bg-white rounded-2xl shadow-md">
+            <h2 className="text-4xl text-blue-600 text-center p-4 my-4 font-bold">Car details</h2>
             <div className="flex flex-col md:flex-row gap-6">
 
                 {/* car image */}
@@ -86,7 +88,7 @@ const CarDetails = () => {
                     <img
                         src={car.image}
                         alt={car.name}
-                        className="w-full h-80 object-cover rounded-xl"
+                        className="w-full h-96 object-cover rounded-xl"
                     />
 
                     {/* Available/unavailable badge */}
@@ -118,8 +120,8 @@ const CarDetails = () => {
                     <button
                         onClick={handleBooking}
                         disabled={car.status !== "available"}
-                        className={`mt-6 py-3 rounded-lg text-white cursor-pointer font-semibold w-full transition ${car.status === "available"
-                            ? "bg-blue-600 hover:bg-blue-700"
+                        className={`mt-6 py-3 rounded-lg text-white text-xl cursor-pointer font-semibold w-full transition ${car.status === "available"
+                            ? "bg-blue-600 hover:bg-blue-800"
                             : "bg-gray-400 cursor-not-allowed"
                             }`}
                     >

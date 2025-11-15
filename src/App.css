@@ -9,7 +9,7 @@
   name: "light";
   default: true;
   --color-primary: #632EE3;
-  --color-secondary: teal;
+  
 }
 
 .btn-primary {
@@ -21,10 +21,30 @@
   @apply opacity-90;
 }
 
-
+/* Font  */
 body {
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }
+
+/* Hero car image animation */
+
+@keyframes hero-car {
+  0% {
+    transform: translateX(80%);
+  }
+  50% {
+    transform: translateX(-30%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.hero-car-image {
+  animation: hero-car 4s linear  forwards;
+}
+
+

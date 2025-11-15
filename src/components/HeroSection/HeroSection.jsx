@@ -38,9 +38,9 @@ const HeroSection = () => {
        
         <div className="mt-10 md:mt-0 flex justify-center md:justify-end">
           <img
-            src="https://pngimg.com/d/audi_PNG1736.png"
+            src="https://i.ibb.co.com/mVhPT2Tr/pngimg-com-audi-PNG1736.png"
             alt="Car"
-            className="w-[85%] sm:w-[70%] md:w-[90%] lg:w-[420px] drop-shadow-2xl select-none"
+            className="w-[85%] sm:w-[70%] md:w-[90%] lg:w-[420px] drop-shadow-2xl select-none hero-car-image"
           />
         </div>
       </div>
