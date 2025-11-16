@@ -101,8 +101,8 @@ const MyListings = () => {
     if (loading) return <Loading />;
 
     return (
-        <div className="max-w-7xl mx-auto mt-10 p-4 sm:p-6 bg-white rounded-lg shadow-md">
-            <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center">
+        <div className="max-w-7xl mx-auto mt-10 md:mt-25 p-4 sm:p-6 bg-white rounded-lg shadow-md">
+            <h1 className="text-2xl sm:text-3xl font-bold mb-5 md:mb-8 text-center text-blue-700">
                 My Listings
             </h1>
 

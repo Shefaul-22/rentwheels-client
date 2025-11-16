@@ -72,8 +72,8 @@ const MyBookings = () => {
     };
 
     return (
-        <div className="max-w-7xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-md">
-            <h1 className="text-3xl font-bold text-center mb-6">
+        <div className="max-w-7xl mx-auto mt-10 md:mt-20 p-6 bg-white rounded-2xl shadow-md">
+            <h1 className="text-3xl font-bold text-center mb-5 md:mb-8 text-blue-700">
                 My Bookings
             </h1>
 

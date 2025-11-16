@@ -1,14 +1,19 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 
 import { Link } from 'react-router';
 
 import { AuthContext } from '../../provider/AuthContext';
 import { FcGoogle } from 'react-icons/fc';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 
 const Register = () => {
 
     const { createUser, signInWithGoogle } = use(AuthContext)
+    const [showPassword, setShowPassword] = useState(false)
+
+    const [success, setSuccess] = useState(false)
+    const [error, setError] = useState('')
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -16,16 +21,43 @@ const Register = () => {
         const password = e.target.password.value;
         const image = e.target.photourl.value;
         const name = e.target.name.value;
+        const terms = e.target.terms.checked;
 
-        
+        const sixPattern = /^.{6,}$/;
+        const casePattern = /^(?=.*[a-z])(?=.*[A-Z]).+$/;
+        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{6,}$/;
+
+        if (!sixPattern.test(password)) {
+            console.log('password didnot match');
+            setError('Password must be six character')
+            return;
+        }
+        else if (!casePattern.test(password)) {
+            setError('password must have at least one uppercase and lowercase character')
+            return;
+        }
+
+        else if (!passwordPattern.test(password)) {
+            setError("Password must be at least 6 characters long, include one uppercase, one lowercase, and one special character.");
+            return;
+        }
+
+        setError('');
+        setSuccess(false);
+
+        if (!terms) {
+            setError('Please accept our terms & conditions');
+            return;
+        }
+
+
         // const newUser = { name, email, image }
-
         // console.log(newUser)
         createUser(email, password)
             .then(result => {
                 // console.log('handle register', result.user);
-                const newUser = { name, email:result.user.email, image }
-                
+                const newUser = { name, email: result.user.email, image }
+
                 // create user in database
                 fetch('http://localhost:3000/users', {
 
@@ -76,6 +108,11 @@ const Register = () => {
             })
     }
 
+    // Handle password show
+    const handlePasswordShow = (e) => {
+        e.preventDefault();
+        setShowPassword(!showPassword)
+    }
 
     return (
         <div className="hero bg-base-200 min-h-screen w-11/12 mx-auto">
@@ -97,10 +134,43 @@ const Register = () => {
                             <input type="text" className="input" name='photourl' placeholder="Photo-URL" />
                             {/* Password */}
                             <label className="label">Password</label>
-                            <input type="password" className="input" name='password' placeholder="Password" />
+                            <div className="relative w-full">
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    name="password"
+                                    className="input  focus:outline-blue-500"
+                                    placeholder="Password"
+                                />
 
-                            <button className="btn btn-neutral mt-4">Register</button>
+                                <button
+                                    type="button"
+                                    onClick={handlePasswordShow}
+                                    className="absolute inset-y-0 right-6 flex items-center text-gray-600 cursor-pointer"
+                                >
+                                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                </button>
+                            </div>
+
+
+                            <div>
+                                <label className="label">
+                                    <input type="checkbox" name='terms' className="checkbox" />
+                                    Please Accept Our Terms & Conditions
+                                </label>
+                            </div>
+
+
+                            <button className="btn text-white bg-blue-700 mt-4  font-bold">Register</button>
                         </fieldset>
+
+                        {
+                            success && <p className='text-green-500'>Account created successfully.</p>
+                        }
+
+                        {
+                            error && <p className='text-red-500'>{error}</p>
+                        }
+
                     </form>
 
                     <div className="flex items-center justify-center">
@@ -108,7 +178,7 @@ const Register = () => {
                         <span className="mx-2 text-gray-500 text-sm">OR</span>
                         <span className="w-full border-t"></span>
                     </div>
-                    <button onClick={handleGoogleSignIn} className="btn  mt-4">
+                    <button onClick={handleGoogleSignIn} className="btn  mt-4 bg-gray-300">
                         <FcGoogle size={24}></FcGoogle>
                         Sign in With Google
                     </button>

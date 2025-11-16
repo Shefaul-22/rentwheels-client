@@ -1,7 +1,13 @@
-import React from "react";
+import React, { use } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../../provider/AuthContext";
+import Loading from "../Loading/Loading";
 
 const HeroSection = () => {
+    const {loading} = use(AuthContext)
+
+    if(loading) return <Loading></Loading>;
+
   return (
     <section className=" bg-gradient-to-r from-[#008cff] to-[#3A7BD5] text-white mt-5">
       <div className="container  px-5 md:px-8 lg:px-12 py-16 md:py-20 lg:py-28 grid md:grid-cols-2 items-center">
@@ -24,7 +30,7 @@ const HeroSection = () => {
 
           {/* btn */}
           <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-3 sm:gap-4 pt-2">
-            <Link to='/browseCars' className="px-8 py-3 bg-yellow-300 text-black font-bold rounded-xl sm:rounded-2xl shadow-lg hover:opacity-90">
+            <Link to='/browseCars' className="px-8 py-3 bg-yellow-300 text-black font-extralight rounded-xl sm:rounded-2xl shadow-lg hover:opacity-90">
               Rent a Car
             </Link>
 

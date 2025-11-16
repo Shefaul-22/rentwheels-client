@@ -1,20 +1,33 @@
 import React, { use } from 'react';
 import { Link, Navigate, NavLink } from 'react-router';
 import { AuthContext } from '../../provider/AuthContext';
+import Swal from 'sweetalert2';
 
 
 const Navbar = () => {
 
     const { user, signOutUser } = use(AuthContext);
-    console.log(user)
+    // console.log(user)
 
     const handleSignOut = () => {
         signOutUser()
             .then(() => {
-                alert('Sign Out successfully')
+                Swal.fire({
+                    title: "Signed Out!",
+                    text: "You have signed out successfully.",
+                    icon: "success",
+                    confirmButtonColor: "#6366F3",
+                });
             })
             .catch(error => {
                 console.log(error);
+
+                Swal.fire({
+                    title: "Error!",
+                    text: error.message,
+                    icon: "error",
+                    confirmButtonColor: "#EF4444",
+                });
             })
     }
 
@@ -66,14 +79,14 @@ const Navbar = () => {
                         <Link to='/login' className='btn btn-primary'>Login</Link>
                 }
             </div> */}
-            
+
 
             <div className="navbar-end">
 
                 {user ? (
                     <div className="dropdown dropdown-end">
 
-                   
+
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                                 <img
@@ -83,12 +96,12 @@ const Navbar = () => {
                             </div>
                         </label>
 
-                        {/* dropdown here */}
+                        {/* photo click dropdown here */}
                         <ul
                             tabIndex={0}
                             className="mt-3 z-50 p-4 shadow-xl menu menu-sm dropdown-content bg-base-100 rounded-xl w-60"
                         >
-                            
+
                             <li className="flex flex-col items-start pb-3 border-b mb-3">
                                 <span className="text-lg font-semibold">
                                     {user.displayName || "User"}
@@ -99,7 +112,7 @@ const Navbar = () => {
                                 </span>
                             </li>
 
-                            
+
                             <li>
                                 <button
                                     onClick={handleSignOut}
