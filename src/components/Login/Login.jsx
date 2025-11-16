@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import { Link } from 'react-router';
 import { AuthContext } from '../../provider/AuthContext';
 import { FcGoogle } from 'react-icons/fc';
@@ -7,12 +7,34 @@ import { FcGoogle } from 'react-icons/fc';
 const Login = () => {
 
     const { signInUser, signInWithGoogle } = use(AuthContext)
+    const [error, setError] = useState('')
 
     const handleLogin = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
         // console.log(email, password);
+        const sixPattern = /^.{6,}$/;
+        const casePattern = /^(?=.*[a-z])(?=.*[A-Z]).+$/;
+        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{6,}$/;
+
+        if (!sixPattern.test(password)) {
+            console.log('password didnot match');
+            setError('Password must be six character')
+            return;
+        }
+        else if (!casePattern.test(password)) {
+            setError('password must have at least one uppercase and lowercase character')
+            return;
+        }
+
+        else if (!passwordPattern.test(password)) {
+            setError("Password must be at least 6 characters long, include one uppercase, one lowercase, and one special character.");
+            return;
+        }
+
+        setError('');
+
         signInUser(email, password)
             .then(result => {
                 console.log(result.user);
@@ -27,7 +49,7 @@ const Login = () => {
         signInWithGoogle()
             .then(result => {
                 console.log(result.user);
-                
+
             })
             .catch(error => {
                 console.log(error);
@@ -56,6 +78,11 @@ const Login = () => {
                             <div><a className="link link-hover">Forgot password?</a></div>
                             <button className="btn font-bold bg-blue-600 text-white mt-4 ">Login</button>
                         </fieldset>
+
+                        {
+                            error && <p className='text-red-500'>{error}</p>
+                        }
+
                     </form>
                     <button onClick={handleGoogleSignIn} className="btn mt-4 bg-gray-300">
                         <FcGoogle size={24}></FcGoogle>

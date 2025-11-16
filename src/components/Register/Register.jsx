@@ -1,10 +1,11 @@
-import React, { use, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 
-import { Link } from 'react-router';
+import { Link, Navigate, useNavigate } from 'react-router';
 
 import { AuthContext } from '../../provider/AuthContext';
 import { FcGoogle } from 'react-icons/fc';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 
 const Register = () => {
@@ -14,6 +15,8 @@ const Register = () => {
 
     const [success, setSuccess] = useState(false)
     const [error, setError] = useState('')
+
+    const navigate = useNavigate();
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -70,6 +73,7 @@ const Register = () => {
                     .then(res => res.json())
                     .then(data => {
                         console.log('data after user save', data);
+                        setSuccess(true)
                     })
 
             })
@@ -101,6 +105,7 @@ const Register = () => {
                     .then(res => res.json())
                     .then(data => {
                         console.log('data after user save', data);
+                        setSuccess(true)
                     })
             })
             .catch(error => {
@@ -113,6 +118,22 @@ const Register = () => {
         e.preventDefault();
         setShowPassword(!showPassword)
     }
+
+    useEffect(() => {
+        if (success) {
+            Swal.fire({
+                title: "Success!",
+                text: "Login to your Account successfully.",
+                icon: "success",
+                timer: 2000,
+                showConfirmButton: true
+            });
+
+            setTimeout(() => {
+                navigate('/'); 
+            }, 1800);
+        }
+    }, [success, navigate]);
 
     return (
         <div className="hero bg-base-200 min-h-screen w-11/12 mx-auto">
@@ -165,6 +186,7 @@ const Register = () => {
 
                         {
                             success && <p className='text-green-500'>Account created successfully.</p>
+
                         }
 
                         {

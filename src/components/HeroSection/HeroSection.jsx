@@ -9,8 +9,8 @@ const HeroSection = () => {
     if(loading) return <Loading></Loading>;
 
   return (
-    <section className=" bg-gradient-to-r from-[#008cff] to-[#3A7BD5] text-white mt-5">
-      <div className="container  px-5 md:px-8 lg:px-12 py-16 md:py-20 lg:py-28 grid md:grid-cols-2 items-center">
+    <section className=" bg-gradient-to-r from-[#4382b6ef] to-[#a551b6] text-white mt-5">
+      <div className="container  px-5  md:px-10 lg:px-14 py-16 md:py-20 lg:py-24 grid md:grid-cols-2 items-center">
 
         
         <div className="text-center md:text-left space-y-5 lg:space-y-6">

@@ -18,7 +18,7 @@
 
 
 .btn-primary:hover {
-  @apply opacity-90;
+  @apply opacity-87 bg-gradient-to-r from-[#fa5c2c56] to-[#4856d493];
 }
 
 /* Font  */
