@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { use, useRef, useState } from 'react';
 
 import { Link, Navigate, useNavigate } from 'react-router';
 
@@ -18,6 +18,23 @@ const Register = () => {
 
     const navigate = useNavigate();
 
+    const nameRef = useRef(null);
+    const emailRef = useRef(null);
+    const photoRef = useRef(null);
+    const passwordRef = useRef(null);
+    const checkboxRef = useRef(null);
+
+    const handleKeyDown = (e, nextField) => {
+        if (e.key === "Enter") {
+            e.preventDefault(); 
+            if (nextField) {
+                nextField.current.focus();
+                
+            }
+        }
+    }
+
+
     const handleRegister = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -28,7 +45,7 @@ const Register = () => {
 
         const sixPattern = /^.{6,}$/;
         const casePattern = /^(?=.*[a-z])(?=.*[A-Z]).+$/;
-        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{6,}$/;
+
 
         if (!sixPattern.test(password)) {
             console.log('password didnot match');
@@ -40,10 +57,6 @@ const Register = () => {
             return;
         }
 
-        else if (!passwordPattern.test(password)) {
-            setError("Password must be at least 6 characters long, include one uppercase, one lowercase, and one special character.");
-            return;
-        }
 
         setError('');
         setSuccess(false);
@@ -73,12 +86,25 @@ const Register = () => {
                     .then(res => res.json())
                     .then(data => {
                         console.log('data after user save', data);
-                        setSuccess(true)
+                        Swal.fire({
+                            title: "Success!",
+                            text: "Account Created Successfully!",
+                            icon: "success",
+                            timer: 1500
+                        });
+                        navigate('/login');
+
                     })
 
             })
             .catch(error => {
                 console.log(error.message);
+                Swal.fire({
+                    title: "Error!",
+                    text: error.message,
+                    icon: "error",
+                    confirmButtonColor: "#EF4444",
+                });
             })
     }
 
@@ -105,11 +131,24 @@ const Register = () => {
                     .then(res => res.json())
                     .then(data => {
                         console.log('data after user save', data);
-                        setSuccess(true)
+
+                        Swal.fire({
+                            title: "Success!",
+                            text: "Login Successfull !",
+                            icon: "success",
+                            timer: 1500
+                        });
+                        navigate('/');
                     })
             })
             .catch(error => {
                 console.log(error);
+                Swal.fire({
+                    title: "Error!",
+                    text: error.message,
+                    icon: "error",
+                    confirmButtonColor: "#EF4444",
+                });
             })
     }
 
@@ -119,44 +158,61 @@ const Register = () => {
         setShowPassword(!showPassword)
     }
 
-    useEffect(() => {
-        if (success) {
-            Swal.fire({
-                title: "Success!",
-                text: "Login to your Account successfully.",
-                icon: "success",
-                timer: 2000,
-                showConfirmButton: true
-            });
+    // useEffect(() => {
+    //     if (success) {
+    //         Swal.fire({
+    //             title: "Success!",
+    //             text: "Login successfull !",
+    //             icon: "success",
+    //             timer: 1000,
+    //             showConfirmButton: true
+    //         });
 
-            setTimeout(() => {
-                navigate('/'); 
-            }, 1800);
-        }
-    }, [success, navigate]);
+    //         setTimeout(() => {
+    //             navigate('/');
+    //         }, 1800);
+    //     }
+    // }, [success, navigate]);
 
     return (
-        <div className="hero bg-base-200 min-h-screen w-11/12 mx-auto">
+        <div className="hero bg-[#bdd7e7] min-h-screen w-11/12 mx-auto">
 
-            <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+            <div className="card bg-base-200 w-full max-w-sm shrink-0 shadow-2xl">
                 <div className="card-body">
-                    <h1 className="text-2xl font-bold text-center">Register now!</h1>
-                    <p className='text-center'>Already have an account?<Link to='/login' className='text-red-500'>Login Now</Link></p>
+                    <h1 className="text-3xl font-bold text-center">Register now!</h1>
+                    <p className='text-center  text-gray-600 font-stretch-90%'>Already have an account?<Link to='/login' className='text-blue-700 font-stretch-90% underline'>Login Now</Link></p>
                     <form onSubmit={handleRegister}>
                         <fieldset className="fieldset">
+
                             {/* Name */}
-                            <label className="label">Name</label>
-                            <input type="text" className="input" name='name' placeholder="Name" />
+                            <label className="label font-semibold text-gray-600 font-stretch-90%">Name</label>
+                            <input ref={nameRef}
+                                onKeyDown={(e) => handleKeyDown(e, emailRef)}
+
+                                type="text" className="input" name='name' placeholder="Enter your name" />
+
                             {/* Email */}
-                            <label className="label">Email</label>
-                            <input type="email" className="input" name='email' placeholder="Email" />
+                            <label className="label font-semibold text-gray-600 font-stretch-90%">Email</label>
+                            <input ref={emailRef}
+                                onKeyDown={(e) => handleKeyDown(e, photoRef)}
+
+                                type="email" className="input" name='email' placeholder=" Enter your email" />
+
                             {/* Photo URL */}
-                            <label className="label">Photo-URL</label>
-                            <input type="text" className="input" name='photourl' placeholder="Photo-URL" />
+                            <label className="label font-semibold text-gray-600 font-stretch-90%">Photo-URL</label>
+                            <input ref={photoRef}
+                                onKeyDown={(e) => handleKeyDown(e, passwordRef)}
+
+                                type="text" className="input" name='photourl' placeholder="Photo-URL" />
+
                             {/* Password */}
-                            <label className="label">Password</label>
+                            <label className="label font-semibold text-gray-600 font-stretch-90%">Password</label>
                             <div className="relative w-full">
                                 <input
+
+                                    ref={passwordRef}
+                                    onKeyDown={(e) => handleKeyDown(e, checkboxRef)}
+
                                     type={showPassword ? "text" : "password"}
                                     name="password"
                                     className="input  focus:outline-blue-500"
@@ -174,14 +230,17 @@ const Register = () => {
 
 
                             <div>
-                                <label className="label">
-                                    <input type="checkbox" name='terms' className="checkbox" />
-                                    Please Accept Our Terms & Conditions
+                                <label className="label font-semibold text-gray-600 font-stretch-90%">
+                                    <input ref={checkboxRef}
+                                        onKeyDown={(e) => handleKeyDown(e, null)}
+
+                                        type="checkbox" name='terms' className="" />
+                                    Please Accept Our Terms & Conditions!
                                 </label>
                             </div>
 
 
-                            <button className="btn text-white bg-blue-700 mt-4  font-bold">Register</button>
+                            <button className="btn text-white bg-blue-700 mt-3  font-bold">Register</button>
                         </fieldset>
 
                         {

@@ -1,13 +1,32 @@
-import React, { use, useState } from 'react';
-import { Link } from 'react-router';
+import React, { use, useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../../provider/AuthContext';
 import { FcGoogle } from 'react-icons/fc';
+import Swal from 'sweetalert2';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 
 const Login = () => {
 
     const { signInUser, signInWithGoogle } = use(AuthContext)
     const [error, setError] = useState('')
+
+    const [showPassword, setShowPassword] = useState(false)
+
+    const navigate = useNavigate();
+
+    const emailRef = useRef(null);
+    const passwordRef = useRef(null);
+
+    const handleKeyDown = (e, nextField) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            if (nextField) {
+                nextField.current.focus();
+
+            }
+        }
+    }
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -16,7 +35,7 @@ const Login = () => {
         // console.log(email, password);
         const sixPattern = /^.{6,}$/;
         const casePattern = /^(?=.*[a-z])(?=.*[A-Z]).+$/;
-        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{6,}$/;
+
 
         if (!sixPattern.test(password)) {
             console.log('password didnot match');
@@ -28,20 +47,30 @@ const Login = () => {
             return;
         }
 
-        else if (!passwordPattern.test(password)) {
-            setError("Password must be at least 6 characters long, include one uppercase, one lowercase, and one special character.");
-            return;
-        }
 
         setError('');
 
         signInUser(email, password)
             .then(result => {
                 console.log(result.user);
+                Swal.fire({
+                    title: "Success!",
+                    text: "Login Successfull !",
+                    icon: "success",
+                    timer: 1500,
+                    confirmButtonColor: "#EF4444",
+                });
+                navigate('/');
 
             })
             .catch(error => {
                 console.log(error.message);
+                Swal.fire({
+                    title: "Error!",
+                    text: error.message,
+                    icon: "error",
+                    confirmButtonColor: "#EF4444",
+                });
             })
     }
 
@@ -49,33 +78,75 @@ const Login = () => {
         signInWithGoogle()
             .then(result => {
                 console.log(result.user);
+                Swal.fire({
+                    title: "Success!",
+                    text: "Login Successfull !",
+                    icon: "success",
+                    timer: 1500,
+                    confirmButtonColor: "#EF4444",
+                });
+                navigate('/');
 
             })
             .catch(error => {
                 console.log(error);
+                console.log(error.message);
+                Swal.fire({
+                    title: "Error!",
+                    text: error.message,
+                    icon: "error",
+                    confirmButtonColor: "#EF4444",
+                });
             })
     }
 
+    // Handle password show
+    const handlePasswordShow = (e) => {
+        e.preventDefault();
+        setShowPassword(!showPassword)
+    }
 
     return (
-        <div className="hero bg-base-200 min-h-screen w-11/12 mx-auto mt-4">
+        <div className="hero bg-[#bdd7e7] min-h-screen w-11/12 mx-auto mt-4">
 
-            <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+            <div className="card bg-base-200 w-full max-w-sm shrink-0 shadow-2xl">
                 <div className="card-body">
-                    <h1 className="text-2xl font-bold text-center">Login</h1>
-                    <p className='text-center'>Don't have an account?<Link to='/register' className='text-red-500'>Register!</Link></p>
+                    <h1 className="text-3xl font-bold text-center">Login</h1>
+                    <p className='text-center text-gray-600 font-stretch-90%'>Don't have an account?<Link to='/register' className='text-red-500 underline'>Register!</Link></p>
                     <form onSubmit={handleLogin}>
                         <fieldset className="fieldset">
 
                             {/* Email */}
-                            <label className="label">Email</label>
-                            <input type="email" className="input" name='email' placeholder="Email" />
+                            <label className="label font-semibold text-gray-600 font-stretch-90%">Email</label>
+                            <input ref={emailRef}
+                                onKeyDown={(e) => handleKeyDown(e, passwordRef)}
+
+                                type="email" className="input" name='email' placeholder="Enter your email" />
 
                             {/* Password */}
-                            <label className="label">Password</label>
-                            <input type="password" className="input" name='password' placeholder="Password" />
+                            <label className="label font-semibold text-gray-600 font-stretch-90%">Password</label>
+                            <div className="relative w-full">
+                                <input
 
-                            <div><a className="link link-hover">Forgot password?</a></div>
+                                    ref={passwordRef}
+                                    onKeyDown={(e) => handleKeyDown(e, null)}
+
+                                    type={showPassword ? "text" : "password"}
+                                    name="password"
+                                    className="input  focus:outline-blue-500"
+                                    placeholder="Password"
+                                />
+
+                                <button
+                                    type="button"
+                                    onClick={handlePasswordShow}
+                                    className="absolute inset-y-0 right-6 flex items-center text-gray-600 cursor-pointer"
+                                >
+                                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                </button>
+                            </div>
+
+                            <div><a className="link link-hover text-gray-500 font-stretch-90%">Forgot password?</a></div>
                             <button className="btn font-bold bg-blue-600 text-white mt-4 ">Login</button>
                         </fieldset>
 
