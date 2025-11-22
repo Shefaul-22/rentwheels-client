@@ -13,12 +13,15 @@
 }
 
 .btn-primary {
-  @apply text-white border-none bg-gradient-to-r from-[#fc8d5979] to-[#353e9193];
+  @apply text-white border-none bg-blue-700
 }
 
-
 .btn-primary:hover {
-  @apply opacity-87 bg-gradient-to-r from-[#fa5c2c56] to-[#4856d493];
+  @apply opacity-95 bg-amber-700
+}
+
+.btn-primary:active {
+  @apply border-yellow-600 opacity-90;
 }
 
 /* Font  */

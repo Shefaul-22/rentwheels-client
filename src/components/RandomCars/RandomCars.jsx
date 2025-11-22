@@ -106,7 +106,7 @@ const RandomCars = () => {
 
                                             <Link
                                                 to={`/carDetails/${car._id}`}
-                                                className="mt-4 inline-block w-full bg-blue-600 text-white py-2 rounded-lg text-center hover:bg-blue-700 transition-colors"
+                                                className="mt-4 inline-block w-full bg-blue-600 text-white py-2 rounded-lg text-center hover:bg-amber-700 transition-colors"
                                             >
                                                 View Details
                                             </Link>

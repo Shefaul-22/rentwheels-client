@@ -32,22 +32,32 @@ const Navbar = () => {
     }
 
     const links = <>
-        <li><NavLink to="/" className={`btn btn-primary mr-3 mb-2`}>Home</NavLink></li>
-        <li><NavLink to="/browseCars" className={`btn btn-primary mr-3 mb-2`}>Browse Cars</NavLink></li>
-        <li><NavLink to="/addCar" className={`btn btn-primary mr-3 mb-2`}>Add Car</NavLink></li>
+
+
+        <li><NavLink to="/" className={({ isActive }) =>
+            `btn btn-primary mr-3 mb-2 ${isActive ? "!bg-yellow-500 " : ""}`}>Home</NavLink></li>
+        <li><NavLink to="/browseCars" className={({ isActive }) =>
+            `btn btn-primary mr-3 mb-2 ${isActive ? "!bg-yellow-500 " : ""}`}>Browse Cars</NavLink></li>
+
+        <li><NavLink to="/addCar" className={({ isActive }) =>
+            `btn btn-primary mr-3 mb-2 ${isActive ? "!bg-yellow-500 " : ""}`}>
+            Add Car</NavLink></li>
 
         {
             user && <>
 
-                <li><NavLink to="/myBookings" className={`btn btn-primary mr-3 mb-2`}>My Bookings</NavLink></li>
-                <li><NavLink to="/myListings" className={`btn btn-primary mr-3 mb-2`}>My Listings</NavLink></li>
+                <li><NavLink to="/myBookings" className={({ isActive }) =>
+                    `btn btn-primary mr-3 mb-2 ${isActive ? "!bg-yellow-500 " : ""}`}>My Bookings</NavLink></li>
+
+                <li><NavLink to="/myListings" className={({ isActive }) =>
+                    `btn btn-primary mr-3 mb-2 ${isActive ? "!bg-yellow-500 " : ""}`}>My Listings</NavLink></li>
             </>
         }
 
     </>
 
     return (
-        <div className="navbar bg-base-100 shadow-sm bg-gradient-to-r from-[#228df1] to-[#1d7971] fixed top-0 left-0 w-full z-50 px-5">
+        <div className="navbar bg-base-100 shadow-sm bg-gradient-to-r from-[#537596] to-[#1d7971] fixed top-0 left-0 w-full z-50 px-5">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

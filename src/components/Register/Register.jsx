@@ -48,7 +48,7 @@ const Register = () => {
 
 
         if (!sixPattern.test(password)) {
-            console.log('password didnot match');
+            console.log('password not match');
             setError('Password must be six character')
             return;
         }
