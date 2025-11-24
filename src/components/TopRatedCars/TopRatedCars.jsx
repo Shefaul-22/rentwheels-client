@@ -31,10 +31,10 @@ const TopRatedCars = () => {
         );
 
     return (
-        <section className="py-16 bg-white">
+        <div className="py-16 bg-white">
             <div className="max-w-7xl mx-auto px-6">
                 <h2 className="text-4xl font-bold text-center mb-5">Top Rated Cars</h2>
-                <p className="text-center text-gray-600 mb-6">
+                <p className="text-center text-gray-600 mb-6 text-xl font-semibold">
                     Explore the cars our customers love the most.
                 </p>
 
@@ -53,7 +53,7 @@ const TopRatedCars = () => {
                                 />
 
                                 <span
-                                    className={`absolute top-3 right-3 px-3 py-1 rounded-full text-white font-semibold ${car.status === "available" ? "bg-green-600" : "bg-red-600"
+                                    className={`absolute top-4 right-4 px-3 py-1 rounded-full text-white font-semibold ${car.status === "available" ? "bg-green-600" : "bg-red-600"
                                         }`}
                                 >
                                     {car.status === "available" ? "Available" : "Unavailable"}
@@ -78,7 +78,7 @@ const TopRatedCars = () => {
                 </div>
 
             </div>
-        </section>
+        </div>
     );
 };
 

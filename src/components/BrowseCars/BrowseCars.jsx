@@ -68,14 +68,14 @@ const BrowseCars = () => {
 
                         >
                             {/*  Car Image */}
-                            <div className="relative ">
+                            <div className="relative p-4">
                                 <img
                                     src={car.image}
                                     alt={car.name}
-                                    className="w-full h-48 object-cover"
+                                    className="w-full h-60 object-cover rounded-xl"
                                 />
                                 <span
-                                    className={`absolute top-3 right-3 px-3 py-1 rounded-full text-white font-semibold ${car.status === "available" ? "bg-green-600" : "bg-red-600"
+                                    className={`absolute top-5 right-5 px-3 py-1 rounded-full text-white font-semibold ${car.status === "available" ? "bg-green-600" : "bg-red-600"
                                         }`}
                                 >
                                     {car.status === "available" ? "Available" : "Unavailable"}

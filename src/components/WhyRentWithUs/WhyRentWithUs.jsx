@@ -4,7 +4,7 @@ import "react-tooltip/dist/react-tooltip.css";
 
 const WhyRentWithUs = () => {
     return (
-        <section className="py-16 bg-gray-100">
+        <div className="py-16 bg-gray-100">
             <div className="max-w-7xl mx-auto px-6">
                 <h2 className="text-4xl font-bold text-center mb-6">Why Rent With Us?</h2>
                 <p className="text-center text-2xl text-gray-600 mb-5 font-medium">
@@ -42,7 +42,7 @@ const WhyRentWithUs = () => {
             <Tooltip id="trustedProviders" content="All providers are verified and trustworthy." place="top" />
 
             <Tooltip id="support" content="Our support team is available 24/7 for your help." place="top" />
-        </section>
+        </div>
     );
 };
 

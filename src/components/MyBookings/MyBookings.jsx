@@ -44,7 +44,7 @@ const MyBookings = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const res = await fetch(`http://localhost:3000/bookings/${bookingId}`, {
+                    const res = await fetch(`http://localhost:5000/bookings/${bookingId}`, {
                         method: "DELETE",
                     });
 

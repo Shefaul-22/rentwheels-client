@@ -104,7 +104,7 @@ const Navbar = () => {
                             <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                                 <img
                                     alt="User"
-                                    src={user.photoURL || "https://i.ibb.co/2M7rtLk/default-user.png"}
+                                    src={user.photoURL? user.photoURL : "https://i.ibb.co.com/JWv2ftcD/usericon.jpg"}
                                 />
                             </div>
                         </label>

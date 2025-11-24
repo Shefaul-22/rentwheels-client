@@ -31,6 +31,8 @@ const RandomCars = () => {
             .catch((err) => console.error(err));
     }, []);
 
+    const displayRandomCars = cars.slice(0,15)
+    // .slice(0, 15)
     if (loading || !cars.length)
         return (
             <div className="text-center mt-10">
@@ -56,7 +58,7 @@ const RandomCars = () => {
                 },
             },
             {
-                breakpoint: 648,
+                breakpoint: 748,
                 settings: {
                     slidesToShow: 1,
                 },
@@ -65,7 +67,7 @@ const RandomCars = () => {
     };
 
     return (
-        <section className="pt-5 bg-[#bdd7e7] mt-4">
+        <div className="py-5 bg-gradient-to-r from-[#4382b6ef] to-[#a551b6] ">
             <div className="max-w-7xl mx-auto px-6">
 
 
@@ -77,13 +79,13 @@ const RandomCars = () => {
                 <div className="w-full">
                     {
                         isMounted && <Slider className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" {...settings}>
-                            {cars.map((car) => (
+                            {displayRandomCars.map((car) => (
                                 <div key={car._id} className="p-3">
 
                                     <div className="bg-gray-100 rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
 
                                         {/* Car Image */}
-                                        <div className="relative">
+                                        <div className="relative p-4 rounded-xl">
                                             <img
                                                 src={car.image}
                                                 alt={car.name}
@@ -121,7 +123,7 @@ const RandomCars = () => {
                     }
                 </div>
             </div>
-        </section>
+        </div>
     );
 };
 

@@ -124,7 +124,7 @@ const AddCar = () => {
                 <div>
                     <label className="block font-medium">Rent Price (per day)</label>
                     <input
-                        type="text"
+                        type="number"
                         name="rentPrice"
                        
                         required

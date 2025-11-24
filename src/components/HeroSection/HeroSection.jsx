@@ -9,7 +9,7 @@ const HeroSection = () => {
     if(loading) return <Loading></Loading>;
 
   return (
-    <section className=" bg-gradient-to-r from-[#4382b6ef] to-[#a551b6] text-white mt-5">
+    <div className=" bg-gradient-to-r from-[#4382b6ef] to-[#a551b6] text-white ">
       <div className="container  px-5  md:px-10 lg:px-14 py-16 md:py-20 lg:py-24 grid md:grid-cols-2 items-center">
 
         
@@ -50,7 +50,7 @@ const HeroSection = () => {
           />
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

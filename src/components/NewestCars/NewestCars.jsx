@@ -67,16 +67,16 @@ const NewestCars = ({ carsPromise }) => {
                             data-tooltip-content={`Price: $${car.rentPrice}/day`}
                         >
                             {/*  Car Image */}
-                            <div className="relative ">
+                            <div className="relative rounded-xl">
                                 <img
                                     src={car.image}
                                     alt={car.name}
-                                    className="w-full h-56 object-cover rounded-md p-5"
+                                    className="w-full h-60 object-cover rounded-xl p-5"
 
 
                                 />
                                 <span
-                                    className={`absolute top-3 right-3 px-3 py-1 rounded-full text-white font-semibold ${car.status === "available" ? "bg-green-600" : "bg-red-600"
+                                    className={`absolute top-5 right-5 px-3 py-1 rounded-full text-white font-semibold ${car.status === "available" ? "bg-green-600" : "bg-red-600"
                                         }`}
                                 >
                                     {car.status === "available" ? "Available" : "Unavailable"}
