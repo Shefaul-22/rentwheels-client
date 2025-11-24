@@ -16,10 +16,14 @@ const MyBookings = () => {
     useEffect(() => {
         if (!user?.email) return;
 
-        fetch(`http://localhost:5000/bookings?email=${user.email}`)
+        fetch(`http://localhost:5000/bookings?email=${user.email}`, {
+            headers: {
+                authorization: `Bearer ${user.accessToken}`
+            }
+        })
             .then((res) => res.json())
             .then((data) => {
-                // console.log(data)
+                console.log(data)
                 setBookings(data);
                 setLoading(false);
             })
@@ -51,7 +55,7 @@ const MyBookings = () => {
                     const data = await res.json();
 
                     if (data) {
-                       
+
                         const updatedBookings = bookings.filter((booking) => booking._id !== bookingId);
                         setBookings(updatedBookings)
 
@@ -98,7 +102,7 @@ const MyBookings = () => {
                             </p>
 
                             <p className="text-gray-700 mb-1 flex  gap-2 items-center">
-                                <FaClock  className="text-[#ff22ff] text-xl"/> <strong>Booked At:</strong>{" "}
+                                <FaClock className="text-[#ff22ff] text-xl" /> <strong>Booked At:</strong>{" "}
                                 {new Date(booking.bookedAt).toLocaleString()}
                             </p>
 

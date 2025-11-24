@@ -12,7 +12,11 @@ const MyListings = () => {
     // Fetch Cars
     useEffect(() => {
         if (!user) return;
-        fetch(`http://localhost:5000/myListing?email=${user.email}`)
+        fetch(`http://localhost:5000/myListing?email=${user.email}`, {
+            headers: {
+                authorization: `Bearer ${user.accessToken}`
+            }
+        })
             .then((res) => res.json())
             .then((data) => setCars(data))
             .catch((err) => console.error(err));
