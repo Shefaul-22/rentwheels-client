@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { AuthContext } from '../../provider/AuthContext';
 import Loading from '../Loading/Loading';
@@ -7,23 +7,37 @@ import "react-tooltip/dist/react-tooltip.css";
 import { FaCar, FaUserShield } from 'react-icons/fa';
 import { FaSackDollar } from 'react-icons/fa6';
 
-const NewestCars = ({ carsPromise }) => {
+const NewestCars = () => {
 
 
-    const cars = use(carsPromise);
+    // const cars = use(carsPromise);
     // console.log(cars)
 
     const [search, setSearch] = useState("");
 
     const [allCars, setAllCars] = useState([]);
+    const [loading, setLoading] = useState(true)
+
+
+    // useEffect(() => {
+    //     setAllCars(cars);  
+    // }, [cars]);
 
     useEffect(() => {
-        setAllCars(cars);  
-    }, [cars]);
 
 
+        fetch('http://localhost:5000/cars/browsecars')
+            .then((res) => res.json())
+            .then((data) => {
+                // console.log(data)
+                setAllCars(data);
+                setLoading(false);
+            })
+            .catch(() => setLoading(false));
+    }, []);
 
-    const { loading } = use(AuthContext)
+
+    // const { loading } = use(AuthContext)
 
     if (loading) {
         return <Loading></Loading>
