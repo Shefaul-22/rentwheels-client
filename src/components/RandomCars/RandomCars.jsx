@@ -6,6 +6,7 @@ import { Link } from "react-router";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { FaCar } from "react-icons/fa";
 
 
 const RandomCars = () => {
@@ -21,7 +22,7 @@ const RandomCars = () => {
 
     // fetch top rated cars
     useEffect(() => {
-        fetch("http://localhost:3000/cars/randomCars")
+        fetch("http://localhost:5000/cars/randomCars")
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
@@ -101,7 +102,9 @@ const RandomCars = () => {
                                         <div className="p-4">
                                             <h3 className="text-xl font-semibold mb-2">{car.name}</h3>
                                             <p className="text-gray-700 mb-2 h-36">{car.description}</p>
-                                            <p className="text-gray-700 mb-1">🚗 Category: {car.category}</p>
+
+                                            <p className="text-gray-700 mb-1 flex  gap-2 items-center"><FaCar className="text-[#2231ff] text-xl"/> Category: {car.category}</p>
+
                                             <p className="text-gray-800 font-bold mb-1">${car.rentPrice}/day</p>
 
                                             <Link

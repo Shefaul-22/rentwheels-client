@@ -73,7 +73,10 @@ const Navbar = () => {
 
                     </ul>
                 </div>
-                <a className=" text-3xl font-bold text-white">Rent<span className='text-yellow-300 font-bold'>Wheels</span></a>
+                <div className='flex justify-center items-center gap-1 '>
+                    <img className='w-12 h-12 rounded-full ml-4' src="https://i.ibb.co.com/HTKvwr6c/rentcarlogoimage.jpg" alt="Rentwheels Logo" />
+                    <a className=" text-3xl font-bold text-white">Rent<span className='text-yellow-300 font-bold'>Wheels</span></a>
+                </div>
             </div>
             <div className="navbar-center ml-15 hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">

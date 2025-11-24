@@ -75,7 +75,7 @@ const Register = () => {
                 const newUser = { name, email: result.user.email, image }
 
                 // create user in database
-                fetch('http://localhost:3000/users', {
+                fetch('http://localhost:5000/users', {
 
                     method: 'POST',
                     headers: {
@@ -120,7 +120,7 @@ const Register = () => {
                 }
                 // console.log(newUser);
                 // create user in database
-                fetch('http://localhost:3000/users', {
+                fetch('http://localhost:5000/users', {
 
                     method: 'POST',
                     headers: {

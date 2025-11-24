@@ -8,7 +8,7 @@ import RandomCars from '../RandomCars/RandomCars';
 import FramerMotionAnimation from '../FramerMotionAnimation/FramerMotionAnimation';
 
 
-const carsPromise = fetch('http://localhost:3000/cars/newest').then(res => res.json());
+const carsPromise = fetch('http://localhost:5000/cars/browsecars').then(res => res.json());
 
 const Home = () => {
     return (

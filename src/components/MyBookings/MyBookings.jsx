@@ -2,6 +2,9 @@ import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../../provider/AuthContext";
 import Loading from "../Loading/Loading";
 import Swal from "sweetalert2";
+import { FaClock, FaUserShield } from "react-icons/fa";
+import { CiMail } from "react-icons/ci";
+import { FaLocationDot } from "react-icons/fa6";
 
 
 const MyBookings = () => {
@@ -13,7 +16,7 @@ const MyBookings = () => {
     useEffect(() => {
         if (!user?.email) return;
 
-        fetch(`http://localhost:3000/bookings?email=${user.email}`)
+        fetch(`http://localhost:5000/bookings?email=${user.email}`)
             .then((res) => res.json())
             .then((data) => {
                 // console.log(data)
@@ -88,21 +91,19 @@ const MyBookings = () => {
                         >
                             <h2 className="text-xl font-semibold mb-2">Car ID: {booking.carId}</h2>
 
-                            <p className="text-gray-700 mb-1">
-                                👤 <strong>Name:</strong> {booking.userName}
+                            <p className="text-gray-700 mb-1 flex  gap-2 items-center"><FaUserShield className="text-[#ff22ff] text-xl" /> Provider : {booking.userName}</p>
+
+                            <p className="text-gray-700 mb-1 flex  gap-2 items-center">
+                                <CiMail className="text-[#ff22ff] text-xl" /> <strong>Email:</strong> {booking.userEmail}
                             </p>
 
-                            <p className="text-gray-700 mb-1">
-                                📧 <strong>Email:</strong> {booking.userEmail}
-                            </p>
-
-                            <p className="text-gray-700 mb-1">
-                                🕒 <strong>Booked At:</strong>{" "}
+                            <p className="text-gray-700 mb-1 flex  gap-2 items-center">
+                                <FaClock  className="text-[#ff22ff] text-xl"/> <strong>Booked At:</strong>{" "}
                                 {new Date(booking.bookedAt).toLocaleString()}
                             </p>
 
-                            <p className="text-gray-700 mb-1">
-                                📍 <strong>Location:</strong> {booking.location}
+                            <p className="text-gray-700 mb-2 flex  gap-2 items-center">
+                                <FaLocationDot className="text-[#ff22ff] text-xl" /> <strong>Location:</strong> {booking.location}
                             </p>
 
                             <button onClick={() => handleBookingCancel(booking._id)}

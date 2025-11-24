@@ -46,7 +46,7 @@ const AddCar = () => {
         };
 
         try {
-            const res = await fetch("http://localhost:3000/cars", {
+            const res = await fetch("http://localhost:5000/cars", {
                 method: "POST",
                 headers: {
                     "content-type": "application/json",

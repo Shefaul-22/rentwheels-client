@@ -3,6 +3,7 @@ import { AuthContext } from "../../provider/AuthContext";
 
 import Loading from "../Loading/Loading";
 import { Link } from "react-router";
+import { FaCar } from "react-icons/fa";
 
 
 const TopRatedCars = () => {
@@ -12,7 +13,7 @@ const TopRatedCars = () => {
 
     // fetch top rated cars 
     useEffect(() => {
-        fetch("http://localhost:3000/cars/topRatedCars")
+        fetch("http://localhost:5000/cars/topRatedCars")
             .then((res) => res.json())
             .then((data) => {
                 console.log(data)
@@ -62,7 +63,8 @@ const TopRatedCars = () => {
                             <div className="p-4">
                                 <h3 className="text-xl font-semibold mb-2">{car.name}</h3>
                                 <p className="text-gray-700 mb-2">{car.description}</p>
-                                <p className="text-gray-700 mb-1">🚗 Category: {car.category}</p>
+                                <p className="text-gray-700 mb-1 flex  gap-2 items-center"><FaCar className="text-[#2231ff] text-xl"/> Category: {car.category}</p>
+
                                 <p className="text-gray-800 font-bold mb-1">${car.rentPrice}/day</p>
                                 <Link
                                     to={`/carDetails/${car._id}`}

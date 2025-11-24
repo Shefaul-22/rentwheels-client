@@ -1,4 +1,7 @@
-import { FaFacebook, FaInstagram, FaLinkedin, FaRegCopyright, FaTwitter, } from "react-icons/fa";
+import { CiMail } from "react-icons/ci";
+import { FaClock, FaFacebook, FaInstagram, FaLinkedin, FaRegCopyright, FaTwitter, } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+import { MdCall } from "react-icons/md";
 import { Link } from "react-router";
 
 
@@ -10,10 +13,10 @@ const Footer = () => {
                 {/* Grid Layout */}
                 <div className="grid gap-10 md:gap-6 sm:grid-cols-2 md:grid-cols-4">
 
-                    {/* Brand / Logo */}
+                    {/*Logo */}
                     <div>
                         <div className="flex items-center gap-2 mb-3">
-                            <img src="/logo.png" alt="logo" className="w-10 h-10 rounded-md" />
+                            <img className='w-12 h-12 rounded-full' src="https://i.ibb.co.com/HTKvwr6c/rentcarlogoimage.jpg" alt="Rentwheels Logo" />
                             <h2 className="text-xl font-bold text-white">RentWheels </h2>
                         </div>
                         <p className="text-sm font-medium">
@@ -21,14 +24,17 @@ const Footer = () => {
                         </p>
                     </div>
 
-                    {/* Contact Info (Updated as per request) */}
+                    {/* Contact Info  */}
                     <div>
                         <h3 className="text-lg font-semibold text-white mb-3">Contact Us</h3>
                         <ul className="space-y-2 text-sm">
-                            <li>📧 support@carrental.com</li>
-                            <li>📞 +880 1234-567890</li>
-                            <li>📍 House 12, Road 5, Gulshan 1, Dhaka, Bangladesh</li>
-                            <li>🕒 Mon - Sat: 9AM - 9PM</li>
+                            <li className="flex  gap-2 items-center"><CiMail className="text-[#fff022] text-xl" /> support@carrental.com</li>
+                            
+                            <li className="flex  gap-2 items-center"><MdCall className="text-[#fff022] text-xl"/> +880 1234-567890</li>
+
+                            <li className="flex items-center gap-2"><FaLocationDot className="text-[#fff022] text-xl" /> House 12, Road 5, Gulshan 1, Dhaka, Bangladesh</li>
+
+                            <li className="flex  gap-2 items-center"><FaClock  className="text-[#fff022] text-xl"/> Mon - Sat: 9AM - 9PM</li>
                         </ul>
                     </div>
 
@@ -61,7 +67,7 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* Divider */}
+                {/* copyright */}
                 <div className="border-t border-gray-700 mt-10 pt-6 text-center text-sm flex justify-center items-center gap-1">
                     <span>{new Date().getFullYear()}</span>
                     <FaRegCopyright />
