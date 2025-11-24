@@ -22,16 +22,16 @@ const AddCar = () => {
     const handleAddCar = async (e) => {
         e.preventDefault();
 
-        
+
         const name = e.target.name.value;
         const description = e.target.description.value;
         const category = e.target.category.value;
         const rentPrice = parseFloat(e.target.rentPrice.value);
         const location = e.target.location.value;
         const image = e.target.image.value;
-        console.log(name,description,category,location, image, rentPrice);
+        console.log(name, description, category, location, image, rentPrice);
 
-   
+
         const newCar = {
             name,
             description,
@@ -49,7 +49,8 @@ const AddCar = () => {
             const res = await fetch("http://localhost:5000/cars", {
                 method: "POST",
                 headers: {
-                    "content-type": "application/json",
+                    authorization: `Bearer ${user?.accessToken}`,
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(newCar),
             });
@@ -126,7 +127,7 @@ const AddCar = () => {
                     <input
                         type="number"
                         name="rentPrice"
-                       
+
                         required
                         className="input input-bordered w-full"
                     />

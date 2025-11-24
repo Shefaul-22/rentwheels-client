@@ -50,6 +50,10 @@ const MyBookings = () => {
                 try {
                     const res = await fetch(`http://localhost:5000/bookings/${bookingId}`, {
                         method: "DELETE",
+                        headers: {
+                            authorization: `Bearer ${user?.accessToken}`,
+                            "Content-Type": "application/json"
+                        }
                     });
 
                     const data = await res.json();

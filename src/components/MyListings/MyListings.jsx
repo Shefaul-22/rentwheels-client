@@ -36,8 +36,12 @@ const MyListings = () => {
         if (!confirmed.isConfirmed) return;
 
         try {
-            const res = await fetch(`http://localhost:3000/cars/${id}`, {
+            const res = await fetch(`http://localhost:5000/cars/${id}`, {
                 method: "DELETE",
+                headers: {
+                    authorization: `Bearer ${user?.accessToken}`,
+                    "Content-Type": "application/json"
+                }
             });
 
             if (res.ok) {
@@ -79,9 +83,12 @@ const MyListings = () => {
         };
 
         try {
-            const res = await fetch(`http://localhost:3000/cars/${selectedCar._id}`, {
+            const res = await fetch(`http://localhost:5000/cars/${selectedCar._id}`, {
                 method: "PATCH",
-                headers: { "Content-Type": "application/json" },
+                headers: { 
+                    authorization: `Bearer ${user?.accessToken}`,
+                    "content-type": "application/json" 
+                },
                 body: JSON.stringify(updatedFields),
             });
 
