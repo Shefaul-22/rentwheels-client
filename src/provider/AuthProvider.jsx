@@ -1,10 +1,10 @@
 
 import React, { useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword , signInWithPopup, signOut} from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
 import { auth } from '../firebase/firebase.init';
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
 
     const googleProvider = new GoogleAuthProvider();
 
@@ -18,13 +18,13 @@ const AuthProvider = ({children}) => {
 
     const signInUser = (email, password) => {
         setLoading(true)
-        return signInWithEmailAndPassword (auth, email, password)
+        return signInWithEmailAndPassword(auth, email, password)
     }
 
     const signOutUser = () => {
         setLoading(true)
         return signOut(auth);
-       
+
     }
     // const signUPwithGoogle = () => {
     //     setLoading(true)
@@ -35,25 +35,10 @@ const AuthProvider = ({children}) => {
         return signInWithPopup(auth, googleProvider)
     }
 
+    
     useEffect(() =>  {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
 
-            
-            // if(currentUser){
-            //     const loggedUser = {email: currentUser.email}
-            //     fetch('http://localhost:3000/getToken', {
-            //         method: 'POST',
-            //         headers: {
-            //             'content-type': "application/json"
-            //         },
-            //         body: JSON.stringify(loggedUser)
-            //     })
-            //     .then(res => res.json())
-            //     .then(data => {
-            //         console.log('after getting token', data.token)
-            //         localStorage.setItem('token', data.token)
-            //     })
-            // }
             setUser(currentUser);
             setLoading(false);
         })
@@ -71,7 +56,7 @@ const AuthProvider = ({children}) => {
         signInUser,
         signInWithGoogle,
         signOutUser,
-        
+
     }
 
     return (
