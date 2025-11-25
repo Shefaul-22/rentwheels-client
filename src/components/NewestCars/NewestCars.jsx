@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { AuthContext } from '../../provider/AuthContext';
 import Loading from '../Loading/Loading';
@@ -45,21 +45,21 @@ const NewestCars = () => {
 
 
 
-    
-    
+
+
     const filteredCars = allCars.filter(car =>
         car.name.toLowerCase().includes(search.toLowerCase())
     );
-    
-    
+
+
     const displayCars = search.trim() ? filteredCars : allCars.slice(0, 6);
-    
+
     if (loading) {
         return <Loading></Loading>
     }
 
 
-    
+
     return (
         <div className=" max-w-7xl mx-auto p-6 bg-[#bdd7e7] mt-5 ">
             <h1 className="text-4xl font-bold mb-6 text-center">Newest Cars</h1>
@@ -92,7 +92,7 @@ const NewestCars = () => {
                                 <img
                                     src={car.image}
                                     alt={car.name}
-                                    className="w-full h-60 object-cover rounded-xl p-5"
+                                    className="w-full h-90 md:h-85 lg:h-60 object-contain rounded-xl p-5"
 
 
                                 />
@@ -139,10 +139,14 @@ const NewestCars = () => {
 
                 }
             </div>
-           
-           {
-            allCars.length === 0 && <p className='text-3xl font-bold text-red-400 text-center'> No cars added yet</p>
-           }
+
+            {
+                allCars && <p className='text-3xl font-bold text-green-600 text-center'> Cars are loading. Please wait a moment....</p>
+            }
+            {
+                !allCars && <p className='text-3xl font-bold text-red-400 text-center'>No cars found. Pleae reload & wait.</p>
+            }
+
         </div>
     );
 };

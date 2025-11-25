@@ -82,7 +82,7 @@ const BrowseCars = () => {
                                 <img
                                     src={car.image}
                                     alt={car.name}
-                                    className="w-full h-60 object-cover rounded-xl"
+                                    className="w-full h-90 md:h-85 lg:h-60 object-contain rounded-xl p-5"
                                 />
                                 <span
                                     className={`absolute top-5 right-5 px-3 py-1 rounded-full text-white font-semibold ${car.status === "available" ? "bg-green-600" : "bg-red-600"
@@ -127,7 +127,10 @@ const BrowseCars = () => {
             </div>
 
             {
-                cars.length === 0 && <p className='text-3xl font-bold text-red-400 text-center'> No cars added yet</p>
+                cars && <p className='text-3xl font-bold text-green-700 text-center'>Cars are Loading. Please wait a moment....</p>
+            }
+            {
+                !cars && <p className='text-3xl font-bold text-red-400 text-center'>No cars found. Pleae reload & wait.</p>
             }
 
             {/* <Tooltip
