@@ -1,16 +1,54 @@
-# React + Vite
+# 🚗 RentWheels – Online Car Rental Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Site:** [https://rentwheels-car.web.app](https://rentwheels-car.web.app)
 
-Currently, two official plugins are available:
+RentWheels is a modern, responsive, and user-friendly online platform where users can browse, book, and manage rental cars effortlessly. Built with React, TailwindCSS, and DaisyUI on the frontend, and Node.js, Express.js, and MongoDB on the backend, it delivers a seamless and interactive car rental experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ⭐ Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Browse All Available Cars**  
+  Explore a wide range of cars with real-time availability, search by name, and smooth hover effects.  
 
-## Expanding the ESLint configuration
+- **Dynamic Car Details Page**  
+  Full car information including model, category, rent price, provider details, and availability.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **User Authentication**  
+  Secure login/register via Firebase Authentication. Only authenticated users can post listings or book cars.
+
+- **Add Car Listing**  
+  Registered users can upload new car listings with images, category, pricing, and availability status.
+
+- **My Bookings & My Listings**  
+  Easily manage booked cars and personal listings from dedicated pages.
+
+- **Responsive & Modern UI**  
+  Fully mobile-friendly design using TailwindCSS and DaisyUI with dynamic tooltips and animations.
+
+- **Interactive UI**  
+  - Tooltips for car prices using **React Tooltip**  
+  - Smooth animations with **Framer Motion**  
+
+- **Fast Backend & Database**  
+  Secure APIs powered by Node.js, Express.js, and MongoDB, with JWT & Firebase token verification.
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- React (Vite)
+- React Router
+- Tailwind CSS + DaisyUI
+- React Icons
+- SweetAlert2
+- React Tooltip
+- Framer Motion
+
+### Backend
+- Node.js + Express.js
+- MongoDB
+- Firebase Admin & Authentication
+
+
