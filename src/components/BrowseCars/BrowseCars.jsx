@@ -82,7 +82,7 @@ const BrowseCars = () => {
                                 <img
                                     src={car.image}
                                     alt={car.name}
-                                    className="w-full h-90 md:h-85 lg:h-60 object-contain rounded-xl p-5"
+                                    className="w-full h-90 md:h-85 lg:h-60 object-contain md:object-cover rounded-xl p-5"
                                 />
                                 <span
                                     className={`absolute top-5 right-5 px-3 py-1 rounded-full text-white font-semibold ${car.status === "available" ? "bg-green-600" : "bg-red-600"

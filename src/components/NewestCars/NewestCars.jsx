@@ -92,7 +92,7 @@ const NewestCars = () => {
                                 <img
                                     src={car.image}
                                     alt={car.name}
-                                    className="w-full h-90 md:h-85 lg:h-60 object-contain rounded-xl p-5"
+                                    className="w-full h-90 md:h-85 lg:h-60 object-contain md:object-cover rounded-xl p-5"
 
 
                                 />

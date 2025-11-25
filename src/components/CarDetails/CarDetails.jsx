@@ -93,7 +93,8 @@ const CarDetails = () => {
                     <img
                         src={car.image}
                         alt={car.name}
-                        className="w-full h-96 object-cover rounded-xl"
+                        className="w-full h-80  md:h-96 object-contain lg:object-cover p-0  lg:p-1
+                         rounded-xl "
                     />
 
                     {/* Available/unavailable badge */}
