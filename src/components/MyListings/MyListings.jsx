@@ -12,7 +12,7 @@ const MyListings = () => {
     // Fetch Cars
     useEffect(() => {
         if (!user) return;
-        fetch(`http://localhost:5000/myListing?email=${user.email}`, {
+        fetch(`https://rentwheels-api-server.vercel.app/myListing?email=${user.email}`, {
             headers: {
                 authorization: `Bearer ${user.accessToken}`
             }
@@ -36,7 +36,7 @@ const MyListings = () => {
         if (!confirmed.isConfirmed) return;
 
         try {
-            const res = await fetch(`http://localhost:5000/cars/${id}`, {
+            const res = await fetch(`https://rentwheels-api-server.vercel.app/cars/${id}`, {
                 method: "DELETE",
                 headers: {
                     authorization: `Bearer ${user?.accessToken}`,
@@ -83,7 +83,7 @@ const MyListings = () => {
         };
 
         try {
-            const res = await fetch(`http://localhost:5000/cars/${selectedCar._id}`, {
+            const res = await fetch(`https://rentwheels-api-server.vercel.app/cars/${selectedCar._id}`, {
                 method: "PATCH",
                 headers: { 
                     authorization: `Bearer ${user?.accessToken}`,

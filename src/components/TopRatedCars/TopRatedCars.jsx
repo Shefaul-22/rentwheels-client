@@ -13,7 +13,7 @@ const TopRatedCars = () => {
 
     // fetch top rated cars 
     useEffect(() => {
-        fetch("http://localhost:5000/cars/topRatedCars")
+        fetch("https://rentwheels-api-server.vercel.app/cars/topRatedCars")
             .then((res) => res.json())
             .then((data) => {
                 console.log(data)

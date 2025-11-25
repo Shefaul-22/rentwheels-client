@@ -17,7 +17,7 @@ const CarDetails = () => {
 
     // fetch data from mongodb
     useEffect(() => {
-        fetch(`http://localhost:5000/cars/${id}`)
+        fetch(`https://rentwheels-api-server.vercel.app/cars/${id}`)
             .then((res) => res.json())
             .then(data => {
                 console.log(data)
@@ -34,7 +34,7 @@ const CarDetails = () => {
         }
 
         try {
-            const res = await fetch("http://localhost:5000/bookings", {
+            const res = await fetch("https://rentwheels-api-server.vercel.app/bookings", {
                 method: "POST",
                 headers: { 
                     "Content-Type": "application/json" 

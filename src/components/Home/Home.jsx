@@ -8,7 +8,7 @@ import RandomCars from '../RandomCars/RandomCars';
 import FramerMotionAnimation from '../FramerMotionAnimation/FramerMotionAnimation';
 
 
-// const carsPromise = fetch('http://localhost:5000/cars/browsecars').then(res => res.json());
+// const carsPromise = fetch('https://rentwheels-api-server.vercel.app/cars/browsecars').then(res => res.json());
 
 const Home = () => {
     return (

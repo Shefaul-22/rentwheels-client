@@ -46,7 +46,7 @@ const AddCar = () => {
         };
 
         try {
-            const res = await fetch("http://localhost:5000/cars", {
+            const res = await fetch("https://rentwheels-api-server.vercel.app/cars", {
                 method: "POST",
                 headers: {
                     authorization: `Bearer ${user?.accessToken}`,

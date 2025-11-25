@@ -26,7 +26,7 @@ const NewestCars = () => {
     useEffect(() => {
 
 
-        fetch('http://localhost:5000/cars/browsecars')
+        fetch('https://rentwheels-api-server.vercel.app/cars/browsecars')
             .then((res) => res.json())
             .then((data) => {
                 // console.log(data)

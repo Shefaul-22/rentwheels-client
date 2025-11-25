@@ -16,7 +16,7 @@ const MyBookings = () => {
     useEffect(() => {
         if (!user?.email) return;
 
-        fetch(`http://localhost:5000/bookings?email=${user.email}`, {
+        fetch(`https://rentwheels-api-server.vercel.app/bookings?email=${user.email}`, {
             headers: {
                 authorization: `Bearer ${user.accessToken}`
             }
@@ -48,7 +48,7 @@ const MyBookings = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const res = await fetch(`http://localhost:5000/bookings/${bookingId}`, {
+                    const res = await fetch(`https://rentwheels-api-server.vercel.app/bookings/${bookingId}`, {
                         method: "DELETE",
                         headers: {
                             authorization: `Bearer ${user?.accessToken}`,
