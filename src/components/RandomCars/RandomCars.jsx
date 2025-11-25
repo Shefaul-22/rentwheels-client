@@ -39,7 +39,7 @@ const RandomCars = () => {
 
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth < 748) setSlidesToShow(1);
+            if (window.innerWidth < 576) setSlidesToShow(1);
             else if (window.innerWidth < 1024) setSlidesToShow(2);
             else setSlidesToShow(3);
         };
