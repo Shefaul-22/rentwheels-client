@@ -57,7 +57,8 @@ const Navbar = () => {
     </>
 
     return (
-        <div className="navbar bg-base-100 shadow-sm bg-gradient-to-r from-[#537596] to-[#1d7971] fixed top-0 left-0 w-full z-50 px-5">
+        <div className="navbar fixed top-0 left-0 w-full z-50 px-5 bg-gradient-to-r from-[#537596] to-[#1d7971] backdrop-blur supports-[backdrop-filter]:backdrop-blur shadow-sm">
+            
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
