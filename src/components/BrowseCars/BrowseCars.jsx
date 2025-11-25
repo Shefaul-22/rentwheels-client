@@ -23,13 +23,13 @@ const BrowseCars = () => {
         fetch('https://rentwheels-api-server.vercel.app/cars/browsecars')
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
+                // console.log(data)
                 setCars(data);
                 setLoading(false);
             })
-            .catch((error) => {
+            .catch(() => {
 
-                console.error(error)
+                // console.error(error)
                 // console.log(error);
                 setLoading(false)
             });
@@ -40,6 +40,7 @@ const BrowseCars = () => {
         car.name.toLowerCase().includes(search.toLowerCase())
     );
 
+    // console.log(filteredCars) 
 
     if (loading) {
         return <Loading></Loading>
@@ -126,9 +127,9 @@ const BrowseCars = () => {
                     ))}
             </div>
 
-            {
-                cars && <p className='text-3xl font-bold text-green-700 text-center'>Cars are Loading. Please wait a moment....</p>
-            }
+            {/* {
+                loading && <p className='text-3xl font-bold text-green-700 text-center'>Cars are Loading. Please wait a moment....</p>
+            } */}
             {
                 !cars && <p className='text-3xl font-bold text-red-400 text-center'>No cars found. Pleae reload & wait.</p>
             }

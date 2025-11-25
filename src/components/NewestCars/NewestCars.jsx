@@ -140,9 +140,7 @@ const NewestCars = () => {
                 }
             </div>
 
-            {
-                allCars && <p className='text-3xl font-bold text-green-600 text-center'> Cars are loading. Please wait a moment....</p>
-            }
+            
             {
                 !allCars && <p className='text-3xl font-bold text-red-400 text-center'>No cars found. Pleae reload & wait.</p>
             }
