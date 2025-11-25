@@ -75,7 +75,7 @@ const Navbar = () => {
                 </div>
                 <div className='flex justify-center items-center gap-1 '>
                     <img className='w-12 h-12 rounded-full ml-4' src="https://i.ibb.co.com/HTKvwr6c/rentcarlogoimage.jpg" alt="Rentwheels Logo" />
-                    <a className=" text-3xl font-bold text-white">Rent<span className='text-yellow-300 font-bold'>Wheels</span></a>
+                    <a className=" text-2xl md:text-3xl font-bold text-white">Rent<span className='text-yellow-300 font-bold'>Wheels</span></a>
                 </div>
             </div>
             <div className="navbar-center ml-15 hidden lg:flex">
