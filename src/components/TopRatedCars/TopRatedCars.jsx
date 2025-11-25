@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AuthContext } from "../../provider/AuthContext";
 
 import Loading from "../Loading/Loading";
@@ -8,16 +8,21 @@ import { FaCar } from "react-icons/fa";
 
 const TopRatedCars = () => {
     const [cars, setCars] = useState([]);
-    const { loading } = use(AuthContext)
+    // const { loading } = use(AuthContext)
+    const [loading, setLoading] = useState(true)
 
 
     // fetch top rated cars 
     useEffect(() => {
+
+        setLoading(true);
+
         fetch("https://rentwheels-api-server.vercel.app/cars/topRatedCars")
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
+                // console.log(data)
                 setCars(data)
+                setLoading(false)
             })
 
             .catch((err) => console.error(err));

@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { AuthContext } from "../../provider/AuthContext";
 
 import Loading from "../Loading/Loading";
@@ -11,60 +11,64 @@ import { FaCar } from "react-icons/fa";
 
 const RandomCars = () => {
     const [cars, setCars] = useState([]);
-    const { loading } = use(AuthContext);
+    // const { loading } = use(AuthContext);
+    const [loading, setLoading] = useState(true)
 
-    const [isMounted, setIsMounted] = useState(false);
+    const [slidesToShow, setSlidesToShow] = useState(3);
 
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
 
 
     // fetch top rated cars
     useEffect(() => {
+
+        setLoading(true)
+
         fetch("https://rentwheels-api-server.vercel.app/cars/randomCars")
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 setCars(data);
+                setLoading(false);
             })
-            .catch((err) => console.error(err));
+            .catch((error) => console.error(error));
     }, []);
 
-    const displayRandomCars = cars.slice(0,15)
+    const displayRandomCars = cars.slice(0, 15)
     // .slice(0, 15)
-    if (loading || !cars.length)
+
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 748) setSlidesToShow(1);
+            else if (window.innerWidth < 1024) setSlidesToShow(2);
+            else setSlidesToShow(3);
+        };
+
+        handleResize(); // Initial check
+        window.addEventListener("resize", handleResize);
+
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+    // react slick Settings
+
+    const settings = {
+        dots: false,
+        infinite: true,
+        speed: 600,
+        slidesToShow: slidesToShow,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 800,
+        pauseOnHover: true,
+        
+    };
+
+    if (loading)
         return (
             <div className="text-center mt-10">
                 <Loading />
             </div>
         );
-
-    // react slick Settings
-    const settings = {
-        dots: false,
-        infinite: true,
-        speed: 600,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 800,
-        pauseOnHover: true,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 2,
-                },
-            },
-            {
-                breakpoint: 748,
-                settings: {
-                    slidesToShow: 1,
-                },
-            },
-        ],
-    };
 
     return (
         <div className="py-5 bg-gradient-to-r from-[#4382b6ef] to-[#a551b6] ">
@@ -78,7 +82,7 @@ const RandomCars = () => {
                 {/* Slider Section */}
                 <div className="w-full">
                     {
-                        isMounted && <Slider className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" {...settings}>
+                        <Slider className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" {...settings}>
                             {displayRandomCars.map((car) => (
                                 <div key={car._id} className="p-3">
 
@@ -105,7 +109,7 @@ const RandomCars = () => {
                                             <h3 className="text-xl font-semibold mb-2">{car.name}</h3>
                                             <p className="text-gray-700 mb-2 h-36">{car.description}</p>
 
-                                            <p className="text-gray-700 mb-1 flex  gap-2 items-center"><FaCar className="text-[#2231ff] text-xl"/> Category: {car.category}</p>
+                                            <p className="text-gray-700 mb-1 flex  gap-2 items-center"><FaCar className="text-[#2231ff] text-xl" /> Category: {car.category}</p>
 
                                             <p className="text-gray-800 font-bold mb-1">${car.rentPrice}/day</p>
 

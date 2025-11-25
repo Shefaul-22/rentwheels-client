@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router';
+import {  Link } from 'react-router';
 import { AuthContext } from '../../provider/AuthContext';
 import Loading from '../Loading/Loading';
 import { Tooltip } from "react-tooltip";
@@ -13,19 +13,26 @@ const BrowseCars = () => {
     const [cars, setCars] = useState([])
     const [loading, setLoading] = useState(true)
 
+
     const [search, setSearch] = useState("")
     // fetch all cars from db
     useEffect(() => {
 
+        setLoading(true);
 
         fetch('https://rentwheels-api-server.vercel.app/cars/browsecars')
             .then((res) => res.json())
             .then((data) => {
-                // console.log(data)
+                console.log(data)
                 setCars(data);
                 setLoading(false);
             })
-            .catch(() => setLoading(false));
+            .catch((error) => {
+
+                console.error(error)
+                // console.log(error);
+                setLoading(false)
+            });
     }, []);
 
 
@@ -37,6 +44,9 @@ const BrowseCars = () => {
     if (loading) {
         return <Loading></Loading>
     }
+
+
+    // if (!cars.length) return <p>No cars found.</p>;
 
     return (
         <div className="p-6 mt-5">
@@ -115,6 +125,10 @@ const BrowseCars = () => {
                         </div>
                     ))}
             </div>
+
+            {
+                cars.length === 0 && <p className='text-3xl font-bold text-red-400 text-center'> No cars added yet</p>
+            }
 
             {/* <Tooltip
                 id="price-tooltip"

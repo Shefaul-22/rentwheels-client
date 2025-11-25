@@ -17,6 +17,7 @@ const NewestCars = () => {
 
     const [allCars, setAllCars] = useState([]);
     const [loading, setLoading] = useState(true)
+    // const { loading } = use(AuthContext)
 
 
     // useEffect(() => {
@@ -25,6 +26,7 @@ const NewestCars = () => {
 
     useEffect(() => {
 
+        setLoading(true);
 
         fetch('https://rentwheels-api-server.vercel.app/cars/browsecars')
             .then((res) => res.json())
@@ -33,26 +35,31 @@ const NewestCars = () => {
                 setAllCars(data);
                 setLoading(false);
             })
-            .catch(() => setLoading(false));
+            .catch((error) => {
+                // console.log(error)
+                console.error(error)
+                setLoading(false)
+
+            });
     }, []);
 
 
-    // const { loading } = use(AuthContext)
 
+    
+    
+    const filteredCars = allCars.filter(car =>
+        car.name.toLowerCase().includes(search.toLowerCase())
+    );
+    
+    
+    const displayCars = search.trim() ? filteredCars : allCars.slice(0, 6);
+    
     if (loading) {
         return <Loading></Loading>
     }
 
 
-    const filteredCars = allCars.filter(car =>
-        car.name.toLowerCase().includes(search.toLowerCase())
-    );
-
-
-    const displayCars = search.trim()
-        ? filteredCars
-        : allCars.slice(0, 6);
-
+    
     return (
         <div className=" max-w-7xl mx-auto p-6 bg-[#bdd7e7] mt-5 ">
             <h1 className="text-4xl font-bold mb-6 text-center">Newest Cars</h1>
@@ -71,7 +78,7 @@ const NewestCars = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {
-                    displayCars.length > 0 ? displayCars.map((car) => (
+                    displayCars.map((car) => (
                         <div
                             key={car._id}
                             className="bg-[#eff3ff] rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
@@ -125,11 +132,17 @@ const NewestCars = () => {
                             />
 
                         </div>
+
+
                     ))
-                        : <p className="col-span-3 text-center text-lg font-semibold text-red-500">No Cars Found</p>
+
 
                 }
             </div>
+           
+           {
+            allCars.length === 0 && <p className='text-3xl font-bold text-red-400 text-center'> No cars added yet</p>
+           }
         </div>
     );
 };
