@@ -51,4 +51,6 @@ RentWheels is a modern, responsive, and user-friendly online platform where user
 - MongoDB
 - Firebase Admin & Authentication
 
+## Author
 
+Developed by **Shefaul Karim**
